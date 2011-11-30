@@ -6,17 +6,12 @@ var windowSize = {
 $(document).ready(function(){
 	getWindowSize();
 	lightbox();
-	$('#login').on('click', login);
 });
 
 function getWindowSize(){
 	$window = $(window);
 	windowSize.width = $window.width();
 	windowSize.height = $window.height();
-}
-
-function login() {
-	
 }
 
 function lightbox() {
