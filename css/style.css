@@ -5,6 +5,10 @@ body {
 	min-height: 100%;
 }
 
+.error {
+	color: #f00;
+}
+
 /*------------------------------------*\
 	HEADER
 \*------------------------------------*/
@@ -38,7 +42,7 @@ fieldset {
 	border-radius: 5px;
 }
 
-.vForm h1{
+.vForm h2{
 	margin: 10px;
 }
 
@@ -74,4 +78,14 @@ fieldset {
 	background: #fff;
 	box-shadow: 0 8px 24px rgba(0,0,0,.3);
 	float: left;
+}
+
+/*------------------------------------*\
+	TYPOGRAFI
+\*------------------------------------*/
+
+#timeText h1{
+	font-family: "Contrail One", cursive;
+	font-size: 50.0rem;
+	color: #eee;
 }

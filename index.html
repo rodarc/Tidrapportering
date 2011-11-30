@@ -5,19 +5,21 @@
 		<title>Tidrapportering</title>
 		<link rel="stylesheet" type="text/css" href="css/normalize.css">
 		<link rel="stylesheet" type="text/css" href="css/style.css">
+		<link href='http://fonts.googleapis.com/css?family=Contrail+One' rel='stylesheet' type='text/css'>
 		<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.0/jquery.min.js"></script>
 	</head>
 	<body>
-		<header>
-		</header>
+	<div id="timeText">
+		<h1>TID</h1>
+	</div>
 		<div class="lightbox">
 			<div>
 				<form action="login.php" method="post" class="vForm">
 					<fieldset >
-						<h1>Logga in</h1>
+						<h2>Logga in</h2>
 						<input type="text" name="username" id="username" placeholder="Användarnamn" />
-						<input type="text" name="password" id="password" placeholder="Lösenord" />
-						<input type="submit" value="Logga in" />
+						<input type="password" name="password" id="password" placeholder="Lösenord" />
+						<input type="submit" value="Logga in" id="login" />
 					</fieldset>		
 				</form>
 			</div>
