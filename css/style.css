@@ -1,0 +1,28 @@
+header {
+	width: 100%;
+	height: 100px;
+	/*position: fixed;*/
+	background-color: #eee;
+}
+
+.vForm input {
+	display: block;
+	margin: 10px;
+	border-radius: 5px;
+}
+
+.vForm h1{
+	margin: 10px;
+}
+
+.vForm {
+	margin: 100px auto 0;
+	width: 400px;
+	font-size: 14px;
+	font-size: 1.4rem;
+}
+
+.vForm fieldset {
+	border-radius: 10px;
+	padding: 10% 0% 10% 25% ;
+}
