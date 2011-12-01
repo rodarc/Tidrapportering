@@ -35,12 +35,16 @@
 		<div class="lightbox">
 			<div>
 				<form action="login.php" method="post" class="vForm">
-					<h2>Lägg till en användare</h2>
-					<input type="email" name="username" id="username" placeholder="Användarnamn" />
-					<input type="password" name="password" id="password" placeholder="Lösenord" />
-					<input type="password" name="passwordCheck" id="passwordCheck" placeholder="Repetera lösenord" />
-					<input type="text" name="firstName" id="firstName" placeholder="Förnamn" />
-					<input type="text" name="lastName" id="lastName" placeholder="Efternamn" />
+					<h2>Skapa projekt</h2>
+					<input type="text" name="projectName" id="projectName" placeholder="Projektnamn" />
+					<input type="estimate" name="estimate" id="estimate" placeholder="Tidsestimat" />
+					<select>
+					  <option selected="selected">Välj kund</option>
+						<option>kund1</option>
+						<option>kund2</option>
+						<option>kund3</option>
+					</select>
+				
 					<input type="submit" value="Lägg till" id="newUser" class="formSubmit button positive" />
 				</form>
 			</div>
