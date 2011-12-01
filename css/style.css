@@ -21,6 +21,8 @@ body {
 	font-family: "Contrail One", cursive;
 	font-size: 50.0rem;
 	color: #eee;
+	bottom: -600px;
+	position: fixed;
 }
 
 /*------------------------------------*\
