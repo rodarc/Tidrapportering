@@ -5,9 +5,9 @@ var windowSize = {
 loggedIn = true;
 
 $(document).ready(function() {
-	$('body').append('<div class="lightbox"></div>');
+	/*$('body').append('<div class="lightbox"></div>');*/
 	getWindowSize();
-	start();
+	/*start();*/
 	$(window).resize(onResize);
 });
 
