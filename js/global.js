@@ -17,6 +17,11 @@ $(document).ready(function() {
 		e.preventDefault();
 		sendForm($(this));
 	});
+
+	$('input[name=passwordCheck]').focusout(function() {
+		doesPasswordMatch($(this));
+	});
+
 	$(window).resize(onResize);
 });
 
@@ -34,6 +39,18 @@ function getWindowSize() {
 function start() {
 	if(!loggedIn) {
 		loadLogin();
+	}
+}
+
+function doesPasswordMatch(element) {
+	var password = element.parent().find('input[name=password]').val(),
+		matchingPassword = element.val();
+	
+	if(matchingPassword != password) {
+		element.css('background', 'red');
+	}
+	if(matchingPassword == password) {
+		element.css('background', 'green');
 	}
 }
 
