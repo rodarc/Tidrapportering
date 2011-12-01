@@ -13,6 +13,12 @@ $(document).ready(function() {
 			e.preventDefault();
 			login($(this));
 		});
+	
+	$('#logout').on('click', function(e){
+			e.preventDefault();
+			logOut($(this));
+		});
+	
 	$(window).resize(onResize);
 });
 
@@ -61,7 +67,7 @@ function login(element) {
 			'password' : password
 		};
 
-		$.post('http://tidrapportering/'+ formAction, parameters, function(data){
+		$.post('http://tidrapportering.html/'+ formAction, parameters, function(data){
 			if(data.status) {
 				loggedIn = true;
 				window.location('http://tidrapportering/project.html');
@@ -73,6 +79,20 @@ function login(element) {
 	} else {
 		form.find('.error').remove();
 		form.children().prepend('<p class="error">Fel användarnamn och/eller lösenord</p>');
+	}
+}
+
+function logOut() {
+
+	if(loggedIn = true){
+		loggedIn = false;
+		console.log(loggedIn);
+		$.post('http://tidrapportering/logout.php', function(data){
+			loggedIn = false;
+
+			/*Ändra till pop-up window så användaren inte blir re-directed till index.html, och måste gå tillbaka till den sida där denne blev utloggad ifrån*/
+			window.location('http://tidrapportering.html');
+		}, 'json')
 	}
 }
 
