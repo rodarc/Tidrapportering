@@ -4,10 +4,21 @@
 
 body {
 	min-height: 100%;
+	color: #2b2525;
 }
 
 .error {
 	color: #f00;
+}
+
+/*------------------------------------*\
+	TYPOGRAFI
+\*------------------------------------*/
+
+#timeText h1 {
+	font-family: "Contrail One", cursive;
+	font-size: 50.0rem;
+	color: #eee;
 }
 
 /*------------------------------------*\
@@ -39,30 +50,66 @@ header {
 
 fieldset {
 	border: none;
+	padding: 0;
+}
+
+input:not([type=submit]):not([type=file]) {
+	border: 1px solid rgba(0,0,0,.2);
+	border-radius: 2px;
+	padding: 10px;
+	box-shadow: inset 0 2px 5px rgba(0,0,0,.3);
 }
 
 .vForm {
 	margin: 10px auto 0;
-	width: 400px;
+	padding: 30px 50px;
 	font-size: 14px;
 	font-size: 1.4rem;
 }
 
 .vForm input {
 	display: block;
-	margin: 10px;
-	border-radius: 5px;
+	margin: 10px 0;
 }
 
-.vForm h2{
-	margin: 10px;
+/*------------------------------------*\
+	BUTTON
+\*------------------------------------*/
+
+.button {
+	padding: 8px 15px;
+	border: none;
+	border-radius: 8px;
+	text-shadow: 0 1px 0 rgba(255,255,255,.75);
+	box-shadow: 0 1px 2px rgba(0,0,0,.37);
+	background: -moz-linear-gradient(top, #ebe9e9 0%, #c8c3c3 100%);
+	background: -webkit-linear-gradient(top, #ebe9e9 0%,#c8c3c3 100%);
 }
 
-.vForm fieldset {
-	border-radius: 10px;
-	padding: 10% 0% 10% 25% ;
+.button:hover, .button .active {
+	box-shadow: inset 0 1px 2px rgba(0,0,0,.37);
+	background: -moz-linear-gradient(bottom, #ebe9e9 0%, #c8c3c3 100%);
+	background: -webkit-linear-gradient(bottom, #ebe9e9 0%,#c8c3c3 100%);
 }
 
+.positive {
+	background: -moz-linear-gradient(top, rgba(207,245,114,1) 0%, rgba(161,219,21,1) 100%);
+	background: -webkit-linear-gradient(top, rgba(207,245,114,1) 0%,rgba(161,219,21,1) 100%);
+}
+.positive:hover {
+	background: -moz-linear-gradient(bottom, rgba(207,245,114,1) 0%, rgba(161,219,21,1) 100%);
+	background: -webkit-linear-gradient(bottom, rgba(207,245,114,1) 0%,rgba(161,219,21,1) 100%);
+}
+
+.notSoPositive {
+	background: -moz-linear-gradient(top, #e44034 0%, #c1352a 100%);
+	background: -webkit-linear-gradient(top, #e44034 0%,#c1352a 100%);
+}
+
+.notSoPositive:hover {
+	background: -moz-linear-gradient(bottom, #e44034 0%, #c1352a 100%);
+	background: -webkit-linear-gradient(bottom, #e44034 0%,#c1352a 100%);
+}
 
 /*------------------------------------*\
 	LIGHTBOX
@@ -80,6 +127,7 @@ fieldset {
 
 .lightbox > div {
 	float: left;
+	position: relative;
 	background: #fff;
 	-moz-box-shadow: 	0 8px 24px rgba(0,0,0,.3);
 	-webkit-box-shadow: 0 8px 24px rgba(0,0,0,.3);
@@ -87,12 +135,4 @@ fieldset {
 	border-radius: 2px;
 }
 
-/*------------------------------------*\
-	TYPOGRAFI
-\*------------------------------------*/
 
-#timeText h1{
-	font-family: "Contrail One", cursive;
-	font-size: 50.0rem;
-	color: #eee;
-}
