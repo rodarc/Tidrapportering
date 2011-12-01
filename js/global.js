@@ -26,7 +26,7 @@ $(document).ready(function() {
 		doesPasswordMatch($(this));
 	});
 
-	$('.menu').on('click', function(){
+	$('.menu').on('click', function(e){
 		e.preventDefault();
 		var link = $(this).attr('href');
 		loadSection(link);
@@ -113,10 +113,11 @@ function loadLogin() {
 	});
 }
 
-function section(link) {
+function loadSection(link) {
 	var splitLink = link.split('/');
 	if(splitLink[0] == 'popups') {
-		loadPopup(splitLink[1] + '.html');
+		loadPopup(splitLink[1]);
+		adjustLightbox();
 	}
 }
 
