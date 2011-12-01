@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="sv">
+	<head>
+		<meta charset="utf-8">
+		<title>Tidrapportering</title>
+		<link rel="stylesheet" type="text/css" href="css/normalize.css">
+		<link rel="stylesheet" type="text/css" href="css/style.css">
+		<link href='http://fonts.googleapis.com/css?family=Contrail+One' rel='stylesheet' type='text/css'>
+		<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.0/jquery.min.js"></script>
+	</head>
+	<body>
+		<div id="headerBar">
+			<header>
+			 <div id="userNav">
+			 	<p>Inloggad som <strong>Per Persson</strong></p>
+			 	<a href="#">Logga ut</a>
+			 </div>
+			 <div id="stopWatch">
+			 </div>
+			</header>
+		</div>
+		<nav>
+			<ul>
+				<li><a href="project.html" class="button">Projekt</a></li>
+				<li><a href="customer.html" class="button">Kunder</a></li>
+				<li><a href="user.html" class="button">Användare</a></li>
+			</ul>
+			<form action="search.php" action="post" q >
+			<input type="search" results="5" name="search" id="search" placeholder="Sök" />
+			</form>
+		</nav>
+		<div id="content">
+
+		</div>
+		<div class="lightbox">
+			<div>
+				<form action="login.php" method="post" class="vForm">
+					<h2>Lägg till en användare</h2>
+					<input type="email" name="username" id="username" placeholder="Användarnamn" />
+					<input type="password" name="password" id="password" placeholder="Lösenord" />
+					<input type="password" name="passwordCheck" id="passwordCheck" placeholder="Repetera lösenord" />
+					<input type="text" name="firstName" id="firstName" placeholder="Förnamn" />
+					<input type="text" name="lastName" id="lastName" placeholder="Efternamn" />
+					<input type="submit" value="Lägg till" id="newUser" class="formSubmit button positive" />
+				</form>
+			</div>
+		</div>
+		
+		<script type="text/javascript" src="js/global.js"></script>
+	</body>
+</html>
