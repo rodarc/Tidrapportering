@@ -14,7 +14,7 @@ body {
 
 
 /*------------------------------------*\
-	TYPOGRAFI
+	TYPOGRAPHY
 \*------------------------------------*/
 
 #timeText h1 {
@@ -76,7 +76,7 @@ header p {
 }
 
 /*------------------------------------*\
-	FORMULÄR
+	FORM
 \*------------------------------------*/
 
 fieldset {
@@ -84,7 +84,7 @@ fieldset {
 	padding: 0;
 }
 
-input:not([type=submit]):not([type=file]) {
+input:not([type=submit]):not([type=file]):not([type=reset]) {
 	border: 1px solid rgba(0,0,0,.2);
 	border-radius: 2px;
 	padding: 10px;
