@@ -8,6 +8,7 @@ $(document).ready(function() {
 	/*$('body').append('<div class="lightbox"></div>');*/
 	getWindowSize();
 	/*start();*/
+	adjustLightbox();
 	$(window).resize(onResize);
 });
 
