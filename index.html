@@ -9,11 +9,33 @@
 		<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.0/jquery.min.js"></script>
 	</head>
 	<body>
-	<div id="timeText">
+	<!-- <div id="timeText">
 		<h1>TID</h1>
-	</div>
+	</div> -->
+	<div id="headerBar">
+			<header>
+			 <div id="userNav">
+			 	<p>Inloggad som <strong>Per Persson</strong></p>
+			 	<a href="#">Logga ut</a>
+			 </div>
+			 <div id="stopWatch">
+			 </div>
+			</header>
+		</div>
+		<nav>
+			<ul>
+				<li><a href="project.html" class="button menu">Projekt</a></li>
+				<li><a href="popups/createCustomer.html" class="button menu">Kunder</a></li>
+				<li><a href="popups/createUser.html" class="button menu">Användare</a></li>
+			</ul>
+			<form action="search.php" action="post" q >
+			<input type="search" results="5" name="search" id="search" placeholder="Sök" />
+			</form>
+		</nav>
+		<div id="content">
+		</div>
 	<div class="lightbox">
-	<div>
+	<div id="login">
 		<form action="login.php" method="post" class="vForm">
 			<h2>Logga in</h2>	
 			<input type="email" name="username" id="username" placeholder="Användarnamn" required="required"/>

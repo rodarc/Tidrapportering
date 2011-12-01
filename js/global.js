@@ -2,13 +2,11 @@ var windowSize = {
 	width: 0,
 	height: 0
 },
-loggedIn = true;
+loggedIn = false;
 
 $(document).ready(function() {
-	/*$('body').append('<div class="lightbox"></div>');*/
 	getWindowSize();
-	/*start();*/
-	adjustLightbox();
+	start('projects');
 	$('#login').on('click', function(e){
 		e.preventDefault();
 		login($(this));
@@ -28,6 +26,12 @@ $(document).ready(function() {
 		doesPasswordMatch($(this));
 	});
 
+	$('.menu').on('click', function(e){
+		e.preventDefault();
+		var link = $(this).attr('href');
+		loadSection(link);
+	})
+
 	$(window).resize(onResize);
 });
 
@@ -42,9 +46,16 @@ function getWindowSize() {
 	windowSize.height = $window.height();
 }
 
-function start() {
+function start(link) {
+	lightbox = $('.lightbox');
 	if(!loggedIn) {
 		loadLogin();
+		adjustLightbox();
+	} else {
+		lightbox.fadeOut(function() {
+			lightbox.children('div').remove();
+		});
+		loadSection(link);
 	}
 }
 
@@ -88,13 +99,32 @@ function sendForm(element) {
 }
 
 function loadLogin() {
-	$('.lightbox').load('login.html', function(){
-		$('#login').on('click', function(e){
-			e.preventDefault();
-			login($(this));
-		});
+	lightbox = $('.lightbox');
+	if(lightbox.find('#login').length > 1) {
 		adjustLightbox();
+	} else {
+		lightbox.load('popups/login.html', function() {
+			adjustLightbox();
+		});
+	}
+	$('#login').on('click', function(e) {
+		e.preventDefault();
+		login($(this));
 	});
+}
+
+function loadSection(link) {
+	var splitLink = link.split('/');
+	if(splitLink[0] == 'popups') {
+		loadPopup(splitLink[1]);
+		adjustLightbox();
+	}
+}
+
+function loadPopup(link) {
+	$('.lightbox').load('popups/'+ link, function() {
+		adjustLightbox();
+	})
 }
 
 function login(element) {
@@ -123,6 +153,8 @@ function login(element) {
 		form.find('.error').remove();
 		form.children().prepend('<p class="error">Fel användarnamn och/eller lösenord</p>');
 	}
+	loggedIn = true;
+	start();
 }
 
 function logOut() {
