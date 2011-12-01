@@ -9,6 +9,10 @@ $(document).ready(function() {
 	getWindowSize();
 	/*start();*/
 	adjustLightbox();
+	$('#login').on('click', function(e){
+			e.preventDefault();
+			login($(this));
+		});
 	$(window).resize(onResize);
 });
 
