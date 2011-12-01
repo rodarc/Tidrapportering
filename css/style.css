@@ -98,7 +98,7 @@ input:not([type=submit]):not([type=file]):not([type=reset]) {
 	font-size: 1.4rem;
 }
 
-.vForm input {
+.vForm input:not([type=submit]):not([type=file]):not([type=reset]) {
 	display: block;
 	margin: 10px 0;
 }
@@ -119,6 +119,7 @@ select{
 
 .button {
 	padding: 8px 15px;
+	margin: 5px 5px 5px 0;
 	border: none;
 	border-radius: 8px;
 	text-shadow: 0 1px 0 rgba(255,255,255,.75);
@@ -143,6 +144,7 @@ select{
 }
 
 .negative {
+	text-shadow: 0 1px 0 rgba(255,255,255,.25);
 	background: -moz-linear-gradient(top, #e44034 0%, #c1352a 100%);
 	background: -webkit-linear-gradient(top, #e44034 0%,#c1352a 100%);
 }
