@@ -2,7 +2,7 @@ var windowSize = {
 	width: 0,
 	height: 0
 },
-loggedIn = false;
+loggedIn = true;
 
 $(document).ready(function() {
 	$('body').append('<div class="lightbox"></div>');
