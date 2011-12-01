@@ -29,6 +29,7 @@ $(document).ready(function() {
 	$('.menu').on('click', function(e){
 		e.preventDefault();
 		var link = $(this).attr('href');
+		console.log(link);
 		loadSection(link);
 	})
 
@@ -55,7 +56,7 @@ function start(link) {
 		lightbox.fadeOut(function() {
 			lightbox.children('div').remove();
 		});
-		loadSection(link);
+		loadSection('project.html');
 	}
 }
 
@@ -118,6 +119,10 @@ function loadSection(link) {
 	if(splitLink[0] == 'popups') {
 		loadPopup(splitLink[1]);
 		adjustLightbox();
+	} else {
+		$('#content').load(link, function(){
+			
+		})
 	}
 }
 
@@ -154,7 +159,7 @@ function login(element) {
 		form.children().prepend('<p class="error">Fel användarnamn och/eller lösenord</p>');
 	}
 	loggedIn = true;
-	start();
+	start('project.html');
 }
 
 function logOut() {
