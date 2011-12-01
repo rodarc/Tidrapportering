@@ -13,7 +13,7 @@ $(document).ready(function() {
 		e.preventDefault();
 		login($(this));
 	});
-	$('#newUser').on('click', function(e){
+	$('.formSubmit').on('click', function(e){
 		e.preventDefault();
 		sendForm($(this));
 	});
@@ -58,7 +58,7 @@ function sendForm(element) {
 			parameters[inputName] = inputValue;
 		}
 	});
-
+	console.log(parameters);
 	$.post('http://Tidrapportering/'+ formAction, parameters, function(data){
 		// Göra något
 	}, 'json')
