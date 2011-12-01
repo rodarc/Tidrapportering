@@ -18,6 +18,11 @@ $(document).ready(function() {
 			e.preventDefault();
 			logOut($(this));
 		});
+
+	$('.formSubmit').on('click', function(e){
+		e.preventDefault();
+		sendForm($(this));
+	});
 	
 	$(window).resize(onResize);
 });
@@ -44,6 +49,28 @@ function isValidEmailAddress(emailAddress) {
 	return pattern.test(emailAddress);
 };
 
+function sendForm(element) {
+	var form = element.parent(),
+		formAction = form.attr('action'),
+		inputFields = form.find('input');
+	
+	var parameters = {};
+
+	$.each(inputFields, function(){
+		input = $(this);
+		if (input.attr('type') != 'submit') {
+			var inputName = input.attr('name'),
+				inputValue = input.val();
+
+			parameters[inputName] = inputValue;
+		}
+	});
+	console.log(parameters);
+	$.post('http://Tidrapportering/'+ formAction, parameters, function(data){
+		// Göra något
+	}, 'json')
+}
+
 function loadLogin() {
 	$('.lightbox').load('login.html', function(){
 		$('#login').on('click', function(e){
@@ -55,7 +82,7 @@ function loadLogin() {
 }
 
 function login(element) {
-	var form = element.parent().parent(),
+	var form = element.parent(),
 		formAction = form.attr('action'),
 		username = $('#username').val(),
 		password = $('#password').val(),
