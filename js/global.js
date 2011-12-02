@@ -144,7 +144,6 @@ function login(element) {
 			'username' : username,
 			'password' : password
 		};
-
 		$.post('http://tidrapportering.html/'+ formAction, parameters, function(data){
 			if(data.status) {
 				loggedIn = true;
