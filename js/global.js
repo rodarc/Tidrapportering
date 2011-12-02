@@ -31,6 +31,13 @@ $(document).ready(function() {
 		var link = $(this).attr('href');
 		console.log(link);
 		loadSection(link);
+	});
+
+	$('#content').on('click', '.addButton', function(e){
+		e.preventDefault();
+		var link = $(this).attr('href');
+		console.log(link);
+		loadSection(link);
 	})
 
 	$(window).resize(onResize);

@@ -11,6 +11,17 @@ body {
 	color: #f00;
 }
 
+.cf:before,
+.cf:after{
+	content:"";
+	display:table;
+}
+.cf:after{
+	clear:both;
+}
+.cf{
+	zoom:1;
+}
 
 
 /*------------------------------------*\
@@ -68,8 +79,9 @@ header p {
 \*------------------------------------*/
 
 #content {
-	width: 960px;
-	margin: 5px auto;
+	width: 940px;
+	margin: 10px auto;
+	padding: 10px;
 	background-color: #eeecec;
 	height: auto;
 	/*position: absolute;*/
