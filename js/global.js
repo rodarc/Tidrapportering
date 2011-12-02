@@ -38,6 +38,10 @@ $(document).ready(function() {
 		var link = $(this).attr('href');
 		console.log(link);
 		loadSection(link);
+	});
+
+	$('.lightbox').on('click', 'input[value="Avbryt"]', function(){
+		closePopup();
 	})
 
 	$(window).resize(onResize);
@@ -128,7 +132,9 @@ function loadSection(link) {
 		adjustLightbox();
 	} else {
 		$('#content').load(link, function(){
-			
+			$('.active').removeClass('active');
+			$('a[href="'+ link +'"]').addClass('active');
+			console.log($('a[href="'+ link +'"]'));
 		})
 	}
 }
@@ -136,7 +142,11 @@ function loadSection(link) {
 function loadPopup(link) {
 	$('.lightbox').load('popups/'+ link, function() {
 		adjustLightbox();
-	})
+	}).fadeIn();
+}
+
+function closePopup() {
+	$('.lightbox').fadeOut().children('div').remove();
 }
 
 function login(element) {
@@ -191,7 +201,7 @@ function adjustLightbox() {
 		contentDivTop = windowSize.height / 2 - contentDivHeight / 2,
 		documentHeight = $(document).height();
 
-	lightbox.show();
+	/*lightbox.show();*/
 
 	if(contentDivHeight > windowSize.height) {
 		contentDivTop = 100;
