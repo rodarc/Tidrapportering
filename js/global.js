@@ -192,8 +192,52 @@ function loadSection(link) {
 			$('.lightbox').fadeOut();
 			$('.active').removeClass('active');
 			$('a[href="'+ link +'"]').addClass('active');
-		})
+			if(link == 'project.html') {
+				loadProjects();
+			}
+		});
 	}
+}
+
+function loadProjects() {
+	var projects = {};
+	projects[0] = {
+		'projectName': 'Tidrapportering',
+		'totalTime': 200,
+		'progress': 73,
+		'customer': 'KYH Göteborg'
+	};
+	projects[1] = {
+		'projectName': 'Hemsida',
+		'totalTime': 50,
+		'progress': 45,
+		'customer': 'Göteborg & Co'
+	}
+	projects[2] = {
+		'projectName': 'Jätteprojektet',
+		'totalTime': 2545,
+		'progress': 5000,
+		'customer': 'Jetebra Ab'
+	}
+	/*$.get('http://tidrapportering/getProjects', function(data){
+		
+	});*/
+	var i = 0;
+	$.each(projects, function() {
+		var html = '<li id="project'+ i +'" class="cf">'+
+			'<hgroup>' +
+				'<h2 class="projectName">'+ this.projectName +'</h2>' +
+				'<h3 class="customerName">'+ this.customer +'</h3>' +
+			'</hgroup>' +
+			'<figure class="progressBar'+ i +' cf">' +
+				'<canvas id="progressBar'+ i +'"width="300px" height="44px"></canvas>' +
+			'</figure>' +
+			'<span class="progressTotal">'+ this.totalTime +'h</span>' +
+		'</li>';
+		$('#project').append(html);
+		progressBarCanvas(i, this.progress, this.totalTime);
+		i++;
+	});
 }
 
 function loadPopup(link) {
@@ -229,16 +273,33 @@ function adjustLightbox() {
 	lightbox.height(documentHeight);
 }
 
-function draw(progress, total) {  
-	var progressPercent = (total-progress);
- 	var canvas = document.getElementById('canvas');  
- 	var ctx = canvas.getContext('2d');  
- 	var gradient = ctx.createLinearGradient(0, 0, 0, canvas.height);  
+function progressBarCanvas(project, progress, total) {  
+ 	var canvas = document.getElementById('progressBar'+project),
+ 		ctx = canvas.getContext('2d'),
+ 		totalPercent = canvas.width / total,
+ 		progressPercent = progress * totalPercent,  
+ 		gradient = ctx.createLinearGradient(0, 0, 0, canvas.height),
+ 		textPosition = 300 - progressPercent + 4;  
+ 	if(progress > total) {
+ 		gradient.addColorStop(1, "rgb(193, 53, 42)");  
+		gradient.addColorStop(0, "rgb(228, 64, 52)");
+ 	} else {
  		gradient.addColorStop(1, "rgb(161, 219, 21)");  
-		gradient.addColorStop(0, "rgb(207, 245, 114)");  
+		gradient.addColorStop(0, "rgb(207, 245, 114)");
+	}
   
 	ctx.save();  
 	ctx.fillStyle = gradient;  
-	ctx.fillRect(0, 0, progressProcent, canvas.height);  
-	ctx.restore();   
+	ctx.fillRect(0, 0, progressPercent, canvas.height);
+	ctx.restore();
+	$('#project'+ project +' .progressBar'+ project).append('<span class="canvasText">'+ progress +'h</span>');
+	canvasText = $('#project'+ project +' .canvasText');
+	console.log(canvasText);
+	if(canvasText.width() > progressPercent) {
+		canvasText.css('left', 4);
+	} else if(progress > total) {
+		canvasText.css('right', 4);
+	} else {
+		canvasText.css('right', textPosition);
+	}
 }

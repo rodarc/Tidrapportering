@@ -27,7 +27,7 @@ body {
 	LISTS
 \*------------------------------------*/
 
-.headerList h2, .headerList h3, .headerList figure, .headerList hgroup {
+.headerList h2, .headerList h3, .headerList figure, .headerList hgroup, .progressTotal {
 	float: left;
 }
 
@@ -61,17 +61,36 @@ body {
 .headerList h3 {
 	font-size: 14px;
 	font-size: 1.4rem;
-	font-weight: none;
+	font-weight: normal;
 	margin: 0;
-	padding: 18px 8px 0 0;
+	padding: 14px 8px 0 0;
 	float: right;
 	color: rgba(255, 255, 255, 0.8);
+}
+
+.headerList figure {
+	position: relative;
 }
 
 .headerList canvas {
 	padding: 0;
 	display: block;
 	background: #eeecec;
+}
+
+.canvasText, .progressTotal {
+	color: #383334;
+	font-size: 24px;
+	font-size: 2.4rem;
+	position: absolute;
+	top: 10px;
+	text-shadow: 0 1px 0 rgba(255,255,255,.75);
+}
+
+.progressTotal {
+	color: #f7f7f7;
+	position: relative;
+	margin-left: 10px;
 }
 
 /*------------------------------------*\
