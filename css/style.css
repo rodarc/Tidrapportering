@@ -90,6 +90,10 @@ h2 {
 	font-size: 2.0rem;
 }
 
+h3 {
+	font-size: 1.6rem;
+}
+
 /*------------------------------------*\
 	HEADER
 \*------------------------------------*/
@@ -152,7 +156,8 @@ h2 {
 
 #projectMembers {
 	float: left;
-	width: 450px;
+	width: 430px;
+	margin-right: 20px;
 }
 
 #myTimeLogs {
@@ -160,11 +165,20 @@ h2 {
 	width: 470px;
 }
 
-.infoBox{
-	background: #dedede;
-	margin-right: 30px;
-	padding:20px;
+#myTimeLogs h2 {
+	width: 320px;
+	display: inline-block;
 }
+
+#myTimeLogs h3 {
+	width: 140px;
+	display: inline-block;
+}
+
+.infoBox{
+	background: #dedede;	
+	padding: 20px;
+}	
 
 /*------------------------------------*\
 	FORM
@@ -218,6 +232,10 @@ select {
 
 .timeField {
 	width: 30px;
+}
+
+#logTitle {
+	width: 17px0px;
 }
 
 /*------------------------------------*\
@@ -287,9 +305,6 @@ select {
 	color: #000;
 	padding-left: 5px;
 	vertical-align:middle;
-
-
-
 }
 
 
@@ -359,7 +374,7 @@ nav a {
 \*------------------------------------*/
 
 .timeLogTable td{
-	padding: 10px 40px 5px 10px;
+	padding: 5px;
 	font-size: 1.5rem;
 }
 

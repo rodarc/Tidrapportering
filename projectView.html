@@ -21,17 +21,23 @@
 	</div>
 	<div id="myTimeLogs">
 		<h2>Dina tidsloggar</h2>
+		<h3>Total tid: 25:19</h3>
 		<div class="infoBox">
 			<a href="#" class="button">Redigera tidslogg</a>
 			<a href="#" class="button">Ta bort tidslogg</a>
-			<a href="#" class="button">Slå ihop tidsloggar</a>
-			<input placeholder="Vad har du gjort?" id"logStart">
-			<input placeholder="00:00" id"logTitle" class="timeField">
-			<span> - </span>
-			<input placeholder="00:00" id"logStop" class="timeField">
-			<a href="#" class="commentButton"></a>
-			<a href="#" class="addTimelogButton">+</a>
+			<a href="#" class="button">Slå ihop tidsloggar</a>		
+			
 			<table class="timeLogTable">
+				<tr>
+					<td><input placeholder="Vad har du gjort?" id="logTitle" /></td>
+					<td>
+						<input placeholder="00:00" id="logStart" class="timeField" />
+						<span> - </span>
+						<input placeholder="00:00" id="logStop" class="timeField" />
+					</td>
+					<td><a href="#" class="commentButton"></a></td>
+					<td><a href="#" class="addTimelogButton">+</a></td>
+				</tr>
 				<tr class="even">
 					<td>Use Cases</td>
 					<td>3:32</td>
