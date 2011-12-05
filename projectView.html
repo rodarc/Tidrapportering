@@ -27,36 +27,38 @@
 			<a href="#" class="button">Ta bort tidslogg</a>
 			<a href="#" class="button">Slå ihop tidsloggar</a>		
 			
-			<table class="timeLogTable">
-				<tr>
-					<td><input placeholder="Vad har du gjort?" id="logTitle" /></td>
-					<td>
-						<input placeholder="00:00" id="logStart" class="timeField" />
-						<span> - </span>
-						<input placeholder="00:00" id="logStop" class="timeField" />
-					</td>
-					<td><a href="#" class="commentButton"></a></td>
-					<td><a href="#" class="addTimelogButton">+</a></td>
-				</tr>
-				<tr class="even">
-					<td>Use Cases</td>
-					<td>3:32</td>
-					<td><a href="#" class="commentButton"></a></td>
-					<td><input type="checkbox" name="timeLog" value="#" /></td>
-				</tr>
-				<tr>
-					<td>Design</td>
-					<td>15:00</td>
-					<td><a href="#" class="commentButton"></a></td>
-					<td><input type="checkbox" name="timeLog" value="#" /></td>
-				</tr>
-				<tr class="even">
-					<td>Goldplating deluxe</td>
-					<td>6:47</td>
-					<td><a href="#" class="commentButton"></a></td>
-					<td><input type="checkbox" name="timeLog" value="#" /></td>
-				</tr>
-		</table>						
+			<form action="timelog.php" method="post">
+				<table class="timeLogTable">
+					<tr>
+						<td><input placeholder="Vad har du gjort?" id="logTitle" /></td>
+						<td>
+							<input placeholder="00:00" id="logStart" class="timeField" />
+							<span> - </span>
+							<input placeholder="00:00" id="logStop" class="timeField" />
+						</td>
+						<td><a href="#" class="commentButton"></a></td>
+						<td><a href="#" class="addTimelogButton">+</a></td>
+					</tr>
+					<tr class="even">
+						<td>Use Cases</td>
+						<td>3:32</td>
+						<td><a href="#" class="commentButton"></a></td>
+						<td><input type="checkbox" name="timeLog" value="#" /></td>
+					</tr>
+					<tr>
+						<td>Design</td>
+						<td>15:00</td>
+						<td><a href="#" class="commentButton"></a></td>
+						<td><input type="checkbox" name="timeLog" value="#" /></td>
+					</tr>
+					<tr class="even">
+						<td>Goldplating deluxe</td>
+						<td>6:47</td>
+						<td><a href="#" class="commentButton"></a></td>
+						<td><input type="checkbox" name="timeLog" value="#" /></td>
+					</tr>
+				</table>
+			</form>						
 		</div>
 	</div>
 </div>
