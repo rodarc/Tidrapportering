@@ -79,6 +79,10 @@ function start() {
 	}
 }
 
+/*------------------------------------*\
+	FORM
+\*------------------------------------*/
+
 function doesPasswordMatch(element) {
 	var password = element.parent().find('input[name=password]').val(),
 		matchingPassword = element.val();
@@ -117,46 +121,6 @@ function sendForm(element) {
 	}, 'json')
 }
 
-function loadLogin() {
-	lightbox = $('.lightbox');
-	if(lightbox.find('#login').length > 1) {
-		adjustLightbox();
-	} else {
-		lightbox.load('popups/login.html', function() {
-			adjustLightbox();
-		});
-	}
-	$('#login').on('click', function(e) {
-		e.preventDefault();
-		login($(this));
-	});
-}
-
-function loadSection(link) {
-	var splitLink = link.split('/');
-	if(splitLink[0] == 'popups') {
-		loadPopup(splitLink[1]);
-		adjustLightbox();
-	} else {
-		history.pushState(null, null, '#/'+link);
-		$('#content').load(link, function(){
-			$('.lightbox').fadeOut();
-			$('.active').removeClass('active');
-			$('a[href="'+ link +'"]').addClass('active');
-		})
-	}
-}
-
-function loadPopup(link) {
-	$('.lightbox').load('popups/'+ link, function() {
-		adjustLightbox();
-	}).fadeIn();
-}
-
-function closePopup() {
-	$('.lightbox').fadeOut().children('div').remove();
-}
-
 function login(element) {
 	var form = element.parent(),
 		formAction = form.attr('action'),
@@ -186,6 +150,25 @@ function login(element) {
 	start('project.html');
 }
 
+/*------------------------------------*\
+	SECTIONS
+\*------------------------------------*/
+
+function loadLogin() {
+	lightbox = $('.lightbox');
+	if(lightbox.find('#login').length > 1) {
+		adjustLightbox();
+	} else {
+		lightbox.load('popups/login.html', function() {
+			adjustLightbox();
+		});
+	}
+	$('#login').on('click', function(e) {
+		e.preventDefault();
+		login($(this));
+	});
+}
+
 function logOut() {
 	if(loggedIn = true){
 		/*$.post('http://tidrapportering/logout.php', function(data){*/
@@ -196,6 +179,31 @@ function logOut() {
 			/*}*/
 		/*}, 'json')*/
 	}
+}
+
+function loadSection(link) {
+	var splitLink = link.split('/');
+	if(splitLink[0] == 'popups') {
+		loadPopup(splitLink[1]);
+		adjustLightbox();
+	} else {
+		history.pushState(null, null, '#/'+link);
+		$('#content').load(link, function(){
+			$('.lightbox').fadeOut();
+			$('.active').removeClass('active');
+			$('a[href="'+ link +'"]').addClass('active');
+		})
+	}
+}
+
+function loadPopup(link) {
+	$('.lightbox').load('popups/'+ link, function() {
+		adjustLightbox();
+	}).fadeIn();
+}
+
+function closePopup() {
+	$('.lightbox').fadeOut().children('div').remove();
 }
 
 function adjustLightbox() {
