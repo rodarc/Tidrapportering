@@ -160,6 +160,10 @@ select {
 	float: left;
 }
 
+.timeField {
+	width: 30px;
+}
+
 /*------------------------------------*\
 	BUTTON
 \*------------------------------------*/
@@ -208,6 +212,14 @@ select {
 .addButton {
 	float: right;
 	margin-right: 20px;
+}
+
+.commentButton {
+	width: 24px;
+	height: 17px;
+	display: inline-block;
+	margin: 5px 5px 0px;
+	background-image: url("../images/comment.png");
 }
 
 /*------------------------------------*\
