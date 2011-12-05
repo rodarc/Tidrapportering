@@ -121,7 +121,6 @@ function sendForm(element) {
 	}, 'json')
 }
 
-<<<<<<< HEAD
 function loadLogin() {
 	lightbox = $('.lightbox');
 	if(lightbox.find('#login').length > 1) {
@@ -149,7 +148,6 @@ function loadSection(link) {
 			$('.active').removeClass('active');
 			$('a[href="'+ link +'"]').addClass('active');
 			draw(30, 100);
-
 		})
 	}
 }
@@ -164,8 +162,6 @@ function closePopup() {
 	$('.lightbox').fadeOut().children('div').remove();
 }
 
-=======
->>>>>>> e17f08520d74788a07eddb42814a3337df226c69
 function login(element) {
 	var form = element.parent(),
 		formAction = form.attr('action'),
