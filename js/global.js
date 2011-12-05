@@ -143,6 +143,8 @@ function loadSection(link) {
 			$('.lightbox').fadeOut();
 			$('.active').removeClass('active');
 			$('a[href="'+ link +'"]').addClass('active');
+			draw(30, 100);
+
 		})
 	}
 }
@@ -219,4 +221,18 @@ function adjustLightbox() {
 	});
 	
 	lightbox.height(documentHeight);
+}
+
+function draw(progress, total) {  
+	var progressPercent = (total-progress);
+ 	var canvas = document.getElementById('canvas');  
+ 	var ctx = canvas.getContext('2d');  
+ 	var gradient = ctx.createLinearGradient(0, 0, 0, canvas.height);  
+ 		gradient.addColorStop(1, "rgb(161, 219, 21)");  
+		gradient.addColorStop(0, "rgb(207, 245, 114)");  
+  
+	ctx.save();  
+	ctx.fillStyle = gradient;  
+	ctx.fillRect(0, 0, progressProcent, canvas.height);  
+	ctx.restore();   
 }
