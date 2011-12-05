@@ -28,8 +28,6 @@ body {
 \*------------------------------------*/
 
 .headerList h2, .headerList h3, .headerList figure, .headerList hgroup {
-/*	display: inline-block;
-*/
 	float: left;
 }
 
@@ -88,6 +86,10 @@ body {
 	position: fixed;
 }
 
+h2 {
+	font-size: 2.0rem;
+}
+
 /*------------------------------------*\
 	HEADER
 \*------------------------------------*/
@@ -130,13 +132,32 @@ body {
 	CONTENT
 \*------------------------------------*/
 
-#content {
-	width: 940px;
-	margin: 10px auto;
+#projectMembers ul {
 	padding: 10px;
+}
+
+#projectMembers li {
+	list-style-type: none;
+	font-weight: bold;
+	font-size: 1.5rem;
+}
+
+#content {
+	width: 920px;
+	margin: 10px auto;
+	padding: 20px;
 	background-color: #eeecec;
 	height: auto;
-	/*position: absolute;*/
+}
+
+#projectMembers {
+	float: left;
+	width: 450px;
+}
+
+#myTimeLogs {
+	float: left;
+	width: 450px;
 }
 
 /*------------------------------------*\
@@ -167,7 +188,7 @@ input:not([type=submit]):not([type=file]):not([type=reset]) {
 	margin: 10px 0;
 }
 
-select{
+select {
 	border: 1px solid rgba(0,0,0,.2);
 	border-radius: 2px;
 	box-shadow: inset 0 2px 5px rgba(0,0,0,.3);
@@ -176,7 +197,22 @@ select{
 	display: block;
 }
 
+#topRow {
+	float: left;
+	width: 920px;
+}
 
+.rightPositioned {
+	float: right;
+}
+
+#itemView .button {
+	float: left;
+}
+
+.timeField {
+	width: 30px;
+}
 
 /*------------------------------------*\
 	BUTTON
@@ -228,6 +264,14 @@ select{
 	margin-right: 20px;
 }
 
+.commentButton {
+	width: 24px;
+	height: 17px;
+	display: inline-block;
+	margin: 5px 5px 0px;
+	background-image: url("../images/comment.png");
+}
+
 /*------------------------------------*\
 	LIGHTBOX
 \*------------------------------------*/
@@ -273,7 +317,7 @@ nav li {
 	float: left;
 }
 
-nav ul{
+nav ul {
 	margin: 0;
 	padding: 0;
 }
@@ -283,7 +327,7 @@ nav a {
 	margin: 5px;
 }
 
-#search{
+#search {
 	padding: 5px 0;
 	margin: 7px 20px;
 	float: right;
