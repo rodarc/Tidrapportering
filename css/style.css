@@ -23,6 +23,56 @@ body {
 	zoom:1;
 }
 
+/*------------------------------------*\
+	LISTS
+\*------------------------------------*/
+
+.headerList h2, .headerList h3, .headerList figure, .headerList hgroup {
+	float: left;
+}
+
+.headerList hgroup {
+	width: 500px;
+	padding: 0;
+	margin: 0;
+}
+
+.headerList li {
+	list-style: none;
+	margin: 0 0 2px;
+	padding: 5px;
+	background: #4e4d4e;
+}
+
+.headerList {
+	margin: 0;
+	padding: 0;
+}
+
+.headerList h2 {
+	font-size: 24px;
+	font-size: 2.4rem;
+	margin: 0;
+	padding: 8px;
+	background: #383334;
+	color: #f7f7f7;
+}
+
+.headerList h3 {
+	font-size: 14px;
+	font-size: 1.4rem;
+	font-weight: none;
+	margin: 0;
+	padding: 18px 8px 0 0;
+	float: right;
+	color: rgba(255, 255, 255, 0.8);
+}
+
+.headerList canvas {
+	padding: 0;
+	display: block;
+	background: #eeecec;
+}
 
 /*------------------------------------*\
 	TYPOGRAPHY
@@ -50,7 +100,7 @@ h2 {
 	background-color: #eeecec;
 }
 
-header {
+#headerBar header {
 	width: 960px;
 	margin: 0 auto;
 	font-size: 1.2rem;
@@ -58,7 +108,7 @@ header {
 
 }
 
-header a {
+#headerBar header a {
 	display: block;
 	text-decoration: none;
 	color: #000;
@@ -66,11 +116,11 @@ header a {
 	margin-top: 5px;
 }
 
-header a:hover {
+#headerBar header a:hover {
 	text-decoration: underline;
 }
 
-header p {
+#headerBar header p {
 	margin: 0px;
 }
 
