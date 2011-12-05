@@ -2,19 +2,30 @@ var windowSize = {
 	width: 0,
 	height: 0
 },
-loggedIn = false;
+loggedIn = false,
+hash;
 
 $(document).ready(function() {
+	$('.lightbox').hide();
 	getWindowSize();
-	start('projects');
+	hash = window.location.hash;
+	if(hash) {
+		var section = hash.split('/');
+		loadSection(section[1]);
+	}
+	if(!hash) {
+		start();
+	}
+
+	$(window).resize(onResize);
 	$('#login').on('click', function(e){
 		e.preventDefault();
 		login($(this));
 	});
-	
+
 	$('#logout').on('click', function(e){
 		e.preventDefault();
-		logOut($(this));
+		logOut();
 	});
 
 	$('.formSubmit').on('click', function(e){
@@ -29,22 +40,18 @@ $(document).ready(function() {
 	$('.menu').on('click', function(e){
 		e.preventDefault();
 		var link = $(this).attr('href');
-		console.log(link);
 		loadSection(link);
 	});
 
 	$('#content').on('click', '.addButton', function(e){
 		e.preventDefault();
 		var link = $(this).attr('href');
-		console.log(link);
 		loadSection(link);
 	});
 
 	$('.lightbox').on('click', 'input[value="Avbryt"]', function(){
 		closePopup();
-	})
-
-	$(window).resize(onResize);
+	});
 });
 
 function onResize(){
@@ -58,9 +65,10 @@ function getWindowSize() {
 	windowSize.height = $window.height();
 }
 
-function start(link) {
+function start() {
 	lightbox = $('.lightbox');
 	if(!loggedIn) {
+		lightbox.show();
 		loadLogin();
 		adjustLightbox();
 	} else {
@@ -104,7 +112,6 @@ function sendForm(element) {
 			parameters[inputName] = inputValue;
 		}
 	});
-	console.log(parameters);
 	$.post('http://Tidrapportering/'+ formAction, parameters, function(data){
 		// Göra något
 	}, 'json')
@@ -131,10 +138,11 @@ function loadSection(link) {
 		loadPopup(splitLink[1]);
 		adjustLightbox();
 	} else {
+		history.pushState(null, null, '#/'+link);
 		$('#content').load(link, function(){
+			$('.lightbox').fadeOut();
 			$('.active').removeClass('active');
 			$('a[href="'+ link +'"]').addClass('active');
-			console.log($('a[href="'+ link +'"]'));
 		})
 	}
 }
@@ -179,16 +187,14 @@ function login(element) {
 }
 
 function logOut() {
-
 	if(loggedIn = true){
-		loggedIn = false;
-		console.log(loggedIn);
-		$.post('http://tidrapportering/logout.php', function(data){
+		/*$.post('http://tidrapportering/logout.php', function(data){*/
 			loggedIn = false;
-
-			/*Ändra till pop-up window så användaren inte blir re-directed till index.html, och måste gå tillbaka till den sida där denne blev utloggad ifrån*/
-			window.location('http://tidrapportering.html');
-		}, 'json')
+			/*if(data.status) {*/
+				/*Ändra till pop-up window så användaren inte blir re-directed till index.html, och måste gå tillbaka till den sida där denne blev utloggad ifrån*/
+				loadLogin();
+			/*}*/
+		/*}, 'json')*/
 	}
 }
 
