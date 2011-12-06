@@ -188,13 +188,12 @@ h3 {
 	width: 530px;
 }
 
-#myTimeLogs h2 {
-	width: 320px;
+#myTimeLogs dt {
 	display: inline-block;
+	
 }
 
-#myTimeLogs h3 {
-	width: 140px;
+#myTimeLogs dl {
 	display: inline-block;
 }
 
