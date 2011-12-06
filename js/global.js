@@ -49,6 +49,13 @@ $(document).ready(function() {
 		loadSection(link);
 	});
 
+	$('#content').on('click', '.project', function(){
+		var element = $(this);
+			attrId = element.attr('id'),
+			projectId = attrId.split('project');
+		loadProjectView(element, projectId[1]);
+	});
+
 	$('.lightbox').on('click', 'input[value="Avbryt"]', function(){
 		closePopup();
 	});
@@ -203,41 +210,59 @@ function loadProjects() {
 	var projects = {};
 	projects[0] = {
 		'projectName': 'Tidrapportering',
+		'id': 1,
 		'totalTime': 200,
 		'progress': 73,
-		'customer': 'KYH Göteborg'
+		'customer': 'KYH Göteborg',
+		'active': true
 	};
 	projects[1] = {
 		'projectName': 'Hemsida',
+		'id': 2,
 		'totalTime': 50,
 		'progress': 45,
-		'customer': 'Göteborg & Co'
+		'customer': 'Göteborg & Co',
+		'active': false
 	}
 	projects[2] = {
 		'projectName': 'Jätteprojektet',
+		'id': 3,
 		'totalTime': 2545,
 		'progress': 5000,
-		'customer': 'Jetebra Ab'
+		'customer': 'Jetebra Ab',
+		'active': true
 	}
 	/*$.get('http://tidrapportering/getProjects', function(data){
 		
 	});*/
-	var i = 0;
 	$.each(projects, function() {
-		var html = '<li id="project'+ i +'" class="cf">'+
-			'<hgroup>' +
-				'<h2 class="projectName">'+ this.projectName +'</h2>' +
-				'<h3 class="customerName">'+ this.customer +'</h3>' +
-			'</hgroup>' +
-			'<figure class="progressBar'+ i +' cf">' +
-				'<canvas id="progressBar'+ i +'"width="300px" height="44px"></canvas>' +
-			'</figure>' +
-			'<span class="progressTotal">'+ this.totalTime +'h</span>' +
+		var html = '<li id="project'+ this.id +'" class="project cf headerList">'+
+			'<div class="projectHeader cf">' +
+				'<hgroup>' +
+					'<h2 class="projectName">'+ this.projectName +'</h2>' +
+					'<h3 class="customerName">'+ this.customer +'</h3>' +
+				'</hgroup>' +
+				'<figure class="progressBar'+ this.id +' cf">' +
+					'<canvas id="progressBar'+ this.id +'"width="300px" height="44px"></canvas>' +
+				'</figure>' +
+				'<span class="progressTotal">'+ this.totalTime +'h</span>' +
+			'</div>' +
 		'</li>';
 		$('#project').append(html);
-		progressBarCanvas(i, this.progress, this.totalTime);
-		i++;
+		progressBarCanvas(this.id, this.progress, this.totalTime);
+		if(!this.active) {
+			$('#project'+this.id).css('opacity', .4);
+		}
 	});
+}
+
+function loadProjectView(element, projectId) {
+	var content = element.find('#itemView');
+	if(content.length < 1) {
+		$.get('projectView.html', function(data) {
+			element.append(data);
+		});
+	}
 }
 
 function loadPopup(link) {
@@ -273,8 +298,8 @@ function adjustLightbox() {
 	lightbox.height(documentHeight);
 }
 
-function progressBarCanvas(project, progress, total) {  
- 	var canvas = document.getElementById('progressBar'+project),
+function progressBarCanvas(id, progress, total) {  
+ 	var canvas = document.getElementById('progressBar'+id),
  		ctx = canvas.getContext('2d'),
  		totalPercent = canvas.width / total,
  		progressPercent = progress * totalPercent,  
@@ -292,9 +317,8 @@ function progressBarCanvas(project, progress, total) {
 	ctx.fillStyle = gradient;  
 	ctx.fillRect(0, 0, progressPercent, canvas.height);
 	ctx.restore();
-	$('#project'+ project +' .progressBar'+ project).append('<span class="canvasText">'+ progress +'h</span>');
-	canvasText = $('#project'+ project +' .canvasText');
-	console.log(canvasText);
+	$('#project'+ id +' .progressBar'+ id).append('<span class="canvasText">'+ progress +'h</span>');
+	canvasText = $('#project'+ id +' .canvasText');
 	if(canvasText.width() > progressPercent) {
 		canvasText.css('left', 4);
 	} else if(progress > total) {

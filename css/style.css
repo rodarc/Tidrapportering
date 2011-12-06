@@ -27,29 +27,38 @@ body {
 	LISTS
 \*------------------------------------*/
 
-.headerList h2, .headerList h3, .headerList figure, .headerList hgroup, .progressTotal {
+ul {
+	margin: 0;
+	padding: 0;
+}
+
+.projectHeader h2, .projectHeader h3, .projectHeader figure, .projectHeader hgroup, .progressTotal {
 	float: left;
 }
 
-.headerList hgroup {
+.headerList {
+	list-style: none;
+	margin: 0 0 2px;
+}
+
+.projectHeader {
+	background: #4e4d4e;
+	cursor: pointer;
+	padding: 5px;
+}
+
+.projectHeader:hover {
+	background: #383334;
+}
+
+.projectHeader hgroup {
 	width: 500px;
 	padding: 0;
 	margin: 0;
 }
 
-.headerList li {
-	list-style: none;
-	margin: 0 0 2px;
-	padding: 5px;
-	background: #4e4d4e;
-}
 
-.headerList {
-	margin: 0;
-	padding: 0;
-}
-
-.headerList h2 {
+.projectHeader h2 {
 	font-size: 24px;
 	font-size: 2.4rem;
 	margin: 0;
@@ -58,7 +67,7 @@ body {
 	color: #f7f7f7;
 }
 
-.headerList h3 {
+.projectHeader h3 {
 	font-size: 14px;
 	font-size: 1.4rem;
 	font-weight: normal;
@@ -68,11 +77,11 @@ body {
 	color: rgba(255, 255, 255, 0.8);
 }
 
-.headerList figure {
+.projectHeader figure {
 	position: relative;
 }
 
-.headerList canvas {
+.projectHeader canvas {
 	padding: 0;
 	display: block;
 	background: #eeecec;
