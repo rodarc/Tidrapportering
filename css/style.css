@@ -27,9 +27,19 @@ body {
 	text-align: center;
 }
 
+.rightPositioned {
+	float: right;
+}
+
 /*------------------------------------*\
 	LISTS
 \*------------------------------------*/
+
+.definitionHeader {
+	display: inline;
+	margin: 0px;
+	font-size: 2.0rem;
+}
 
 ul {
 	margin: 0;
@@ -189,27 +199,29 @@ h3 {
 #projectMembers {
 	float: left;
 	width: 350px;
-	margin-right: 20px;
+	margin: 20px 20px 20px 0px;
 }
 
 #myTimeLogs {
 	float: left;
 	width: 530px;
-}
-
-#myTimeLogs dt {
-	display: inline-block;
-	
-}
-
-#myTimeLogs dl {
-	display: inline-block;
+	margin: 20px 0px 20px 0px;
 }
 
 .infoBox{
 	background: #dedede;	
 	padding: 20px;
-}	
+	margin-top: 5px;
+}
+
+.listDataTermLeft {
+	float: left;
+}
+
+.listDataTermRight {
+	position: relative;
+	margin-left: 400px;
+}
 
 /*------------------------------------*\
 	FORM
@@ -257,10 +269,6 @@ select {
 #itemView {
 	padding:10px;
 	width: 900px;
-}
-
-.rightPositioned {
-	float: right;
 }
 
 #itemView .button {
