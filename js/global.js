@@ -33,7 +33,7 @@ $(document).ready(function() {
 		sendForm($(this));
 	});
 
-	$('input[name=passwordCheck]').focusout(function() {
+	$('.lightbox').on('focusout', 'input[name=passwordCheck]', function() {
 		doesPasswordMatch($(this));
 	});
 
@@ -49,9 +49,9 @@ $(document).ready(function() {
 		loadSection(link);
 	});
 
-	$('#content').on('click', '.project', function(){
+	$('#content').on('click', '.projectHeader', function(){
 		var element = $(this);
-			attrId = element.attr('id'),
+			attrId = element.parent().attr('id'),
 			projectId = attrId.split('project');
 		loadProjectView(element, projectId[1]);
 	});
@@ -258,10 +258,12 @@ function loadProjects() {
 		var	projectName = this.projectName,
 			projectId   = this.id,
 			customer    = this.customer,
-			totalTime   = this.totalTime;
+			totalTime   = this.totalTime,
+			progress    = this.progress,
+			active      = this.active;
 		$.get('projectList.html', function(data) {
 			var html = $(data);
-			html.find('li').attr('id', 'projectet');
+			html.attr('id', 'project'+projectId);
 			html.find('figure').addClass('progressBar'+projectId);
 			html.find('canvas').attr('id', 'progressBar'+projectId);
 			html.find('h2').html(projectName);
@@ -269,23 +271,25 @@ function loadProjects() {
 			html.find('.progressTotal').html(totalTime);
 			$('#project').append(html);
 
-			progressBarCanvas(projectId, this.progress, this.totalTime);
-			if(!this.active) {
-				$('#project'+this.id).css('opacity', .4);
+			progressBarCanvas(projectId, progress, totalTime);
+			if(!active) {
+				$('#project'+projectId).css('opacity', .4);
 			}
 		});
 	});
 }
 
 function loadProjectView(element, projectId) {
-	var content = element.find('#itemView');
+	var content = element.parent().find('#itemView');
 	if(content.length < 1) {
 		$.get('projectView.html', function(data) {
-			element.append(data);
+			element.parent().append(data);
 			$('#itemView').css('height', 0).animate({height: '400px'}, 300);
+			element.addClass('active');
 		});
 	} else {
 		$('#itemView').animate({height: '1px'}, 300).delay(1000).remove();
+		element.removeClass('active');
 	}
 }
 
@@ -342,7 +346,7 @@ function progressBarCanvas(id, progress, total) {
 	ctx.fillRect(0, 0, progressPercent, canvas.height);
 	ctx.restore();
 	$('.progressBar'+ id).append('<span class="canvasText">'+ progress +'h</span>');
-	canvasText = $('#project'+ id +' .canvasText');
+	canvasText = $('#project'+ id).find('.canvasText');
 	if(canvasText.width() > progressPercent) {
 		canvasText.css('left', 4);
 	} else if(progress > total) {
