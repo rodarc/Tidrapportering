@@ -55,12 +55,15 @@ ul {
 	background: #383334;
 }
 
+.projectHeader.active {
+	background: #ff0084;
+}
+
 .projectHeader hgroup {
 	width: 500px;
 	padding: 0;
 	margin: 0;
 }
-
 
 .projectHeader h2 {
 	font-size: 24px;
@@ -300,7 +303,7 @@ select {
 	background: -webkit-linear-gradient(top, #ebe9e9 0%,#c8c3c3 100%);
 }
 
-.button:hover, .button.active {
+.button:hover, .button.active, .smallButton:hover, .smallButton.active {
 	box-shadow: inset 0 1px 2px rgba(0,0,0,.37);
 	background: -moz-linear-gradient(bottom, #ebe9e9 0%, #c8c3c3 100%);
 	background: -webkit-linear-gradient(bottom, #ebe9e9 0%,#c8c3c3 100%);
@@ -341,13 +344,15 @@ select {
 	vertical-align:middle;
 }
 
-.addTimelogButton {
-	font-size: 2rem;
+.smallButton {
+	font-size: 1.2rem;
 	font-weight: bold;
-	text-decoration: none;
+	border: none;
 	color: #000;
 	padding-left: 5px;
-	vertical-align:middle;
+	border-radius: 5px;
+	text-shadow: 0 1px 0 rgba(255,255,255,.75);
+	box-shadow: 0 1px 2px rgba(0,0,0,.37);
 }
 
 
@@ -424,10 +429,9 @@ nav a {
 
 .even {
 	background: #eee;
-
 }
-form #timelog {
-	display: block;
 
+.timeLogTable thead {
+	display: none;
 }
 
