@@ -280,15 +280,17 @@ function loadProjects() {
 }
 
 function loadProjectView(element, projectId) {
-	var content = element.parent().find('#itemView');
+	var content = element.parent().find('.projectContent');
 	if(content.length < 1) {
 		$.get('projectView.html', function(data) {
 			element.parent().append(data);
-			$('#itemView').css('height', 0).animate({height: '400px'}, 300);
+			element.parent().find('.projectContent').animate({height: '400px'}, 300);
 			element.addClass('active');
 		});
 	} else {
-		$('#itemView').animate({height: '1px'}, 300).delay(1000).remove();
+		content.animate({height: '1px'}, 300, function(){
+			content.remove();
+		});
 		element.removeClass('active');
 	}
 }
