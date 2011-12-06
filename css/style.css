@@ -23,6 +23,10 @@ body {
 	zoom:1;
 }
 
+.center{
+	text-align: center;
+}
+
 /*------------------------------------*\
 	LISTS
 \*------------------------------------*/
@@ -184,13 +188,13 @@ h3 {
 
 #projectMembers {
 	float: left;
-	width: 430px;
+	width: 350px;
 	margin-right: 20px;
 }
 
 #myTimeLogs {
 	float: left;
-	width: 470px;
+	width: 530px;
 }
 
 #myTimeLogs h2 {
@@ -240,14 +244,21 @@ select {
 	border: 1px solid rgba(0,0,0,.2);
 	border-radius: 2px;
 	box-shadow: inset 0 2px 5px rgba(0,0,0,.3);
-	padding: 10px;
+	padding: 4px;
 	margin: 10px 0;
 	display: block;
+	font-size: 1.3rem;
 }
 
 #topRow {
 	float: left;
-	width: 920px;
+	width: 900px;
+}
+
+#itemView {
+	padding:10px;
+	width: 900px;
+	
 }
 
 .rightPositioned {
@@ -259,12 +270,17 @@ select {
 }
 
 .timeField {
-	width: 30px;
+	width: 40px;
 }
 
 #logTitle {
 	width: 17px0px;
 }
+
+#myTimeLogs input{
+	padding: 5px;
+}
+
 
 /*------------------------------------*\
 	BUTTON
@@ -401,12 +417,18 @@ nav a {
 	TABLE
 \*------------------------------------*/
 
-.timeLogTable td{
+.timeLogTable td {
 	padding: 5px;
 	font-size: 1.5rem;
+
 }
 
-.even{
+.even {
 	background: #eee;
+
+}
+form #timelog {
+	display: block;
+
 }
 
