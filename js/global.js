@@ -33,7 +33,7 @@ $(document).ready(function() {
 		sendForm($(this));
 	});
 
-	$('input[name=passwordCheck]').focusout(function() {
+	$('.lightbox').on('focusout', 'input[name=passwordCheck]', function() {
 		doesPasswordMatch($(this));
 	});
 
