@@ -235,7 +235,7 @@ function loadProjects() {
 	/*$.get('http://tidrapportering/getProjects', function(data){
 		
 	});*/
-	$.each(projects, function() {
+	/*$.each(projects, function() {
 		var html = '<li id="project'+ this.id +'" class="project cf headerList">'+
 			'<div class="projectHeader cf">' +
 				'<hgroup>' +
@@ -253,6 +253,27 @@ function loadProjects() {
 		if(!this.active) {
 			$('#project'+this.id).css('opacity', .4);
 		}
+	});*/
+	$.each(projects, function() {
+		var	projectName = this.projectName,
+			projectId   = this.id,
+			customer    = this.customer,
+			totalTime   = this.totalTime;
+		$.get('projectList.html', function(data) {
+			var html = $(data);
+			html.find('li').attr('id', 'projectet');
+			html.find('figure').addClass('progressBar'+projectId);
+			html.find('canvas').attr('id', 'progressBar'+projectId);
+			html.find('h2').html(projectName);
+			html.find('h3').html(customer);
+			html.find('.progressTotal').html(totalTime);
+			$('#project').append(html);
+
+			progressBarCanvas(projectId, this.progress, this.totalTime);
+			if(!this.active) {
+				$('#project'+this.id).css('opacity', .4);
+			}
+		});
 	});
 }
 
@@ -261,7 +282,10 @@ function loadProjectView(element, projectId) {
 	if(content.length < 1) {
 		$.get('projectView.html', function(data) {
 			element.append(data);
+			$('#itemView').css('height', 0).animate({height: '400px'}, 300);
 		});
+	} else {
+		$('#itemView').animate({height: '1px'}, 300).delay(1000).remove();
 	}
 }
 
@@ -317,12 +341,13 @@ function progressBarCanvas(id, progress, total) {
 	ctx.fillStyle = gradient;  
 	ctx.fillRect(0, 0, progressPercent, canvas.height);
 	ctx.restore();
-	$('#project'+ id +' .progressBar'+ id).append('<span class="canvasText">'+ progress +'h</span>');
+	$('.progressBar'+ id).append('<span class="canvasText">'+ progress +'h</span>');
 	canvasText = $('#project'+ id +' .canvasText');
 	if(canvasText.width() > progressPercent) {
 		canvasText.css('left', 4);
 	} else if(progress > total) {
 		canvasText.css('right', 4);
+		$('#project'+ id).find('.canvasText').css('text-shadow', '0 1px 0 rgba(255,255,255,.25)');
 	} else {
 		canvasText.css('right', textPosition);
 	}
