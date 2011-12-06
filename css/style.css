@@ -55,12 +55,15 @@ ul {
 	background: #383334;
 }
 
+.projectHeader.active {
+	background: #ff0084;
+}
+
 .projectHeader hgroup {
 	width: 500px;
 	padding: 0;
 	margin: 0;
 }
-
 
 .projectHeader h2 {
 	font-size: 24px;
