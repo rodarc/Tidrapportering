@@ -273,7 +273,7 @@ function loadProjects() {
 
 			progressBarCanvas(projectId, progress, totalTime);
 			if(!active) {
-				$('#project'+projectId).css('opacity', .4);
+				$('#project'+projectId).find('.projectHeader').css('opacity', .4);
 			}
 		});
 	});

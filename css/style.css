@@ -12,19 +12,24 @@ body {
 }
 
 .cf:before,
-.cf:after{
+.cf:after {
 	content:"";
 	display:table;
 }
-.cf:after{
+.cf:after {
 	clear:both;
 }
-.cf{
+.cf {
 	zoom:1;
 }
 
-.center{
+.center {
 	text-align: center;
+}
+
+.centralize {
+	width: 960px;
+	margin: 0 auto;
 }
 
 .rightPositioned {
@@ -53,6 +58,7 @@ ul {
 .headerList {
 	list-style: none;
 	margin: 0 0 2px;
+	overflow: hidden;
 }
 
 .projectHeader {
@@ -67,6 +73,7 @@ ul {
 
 .projectHeader.active {
 	background: #ff0084;
+	box-shadow: 0 3px 5px rgba(0, 0, 0, 0.3);
 }
 
 .projectContent {
@@ -402,11 +409,9 @@ select {
 \*------------------------------------*/
 
 nav {
-	width: 940px;
 	margin: 0 auto;
 	background: #2b2525;
 	height: 40px;
-	padding-left:20px;
 }
 
 nav li {
