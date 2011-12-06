@@ -44,6 +44,7 @@ body {
 	display: inline;
 	margin: 0px;
 	font-size: 2.0rem;
+	font-weight: bold;
 }
 
 ul {
@@ -235,7 +236,9 @@ h3 {
 
 .listDataTermRight {
 	position: relative;
-	margin-left: 396px;
+	margin: 0px 0px 8px 435px;
+	padding-top: 5px;
+	font-size: 1.3rem;
 }
 
 /*------------------------------------*\
