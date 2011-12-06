@@ -2,7 +2,7 @@
 	<div id="topRow">
 		<a href="#" class="button">Bjud in</a>
 		<a href="#" class="button positive">Starta tidslogg</a>
-		<select class="rightPositioned vForm">
+		<select class="rightPositioned">
 			<option selected="selected">Välj roll</option>
 			<option>Designer</option>
 			<option>Utvecklare</option>
@@ -27,7 +27,7 @@
 			<a href="#" class="button">Ta bort tidslogg</a>
 			<a href="#" class="button">Slå ihop tidsloggar</a>		
 			
-			<form action="timelog.php" method="post">
+			<form class="cf" action="timelog.php" method="post">
 				<table class="timeLogTable">
 					<tr>
 						<td><input placeholder="Vad har du gjort?" id="logTitle" /></td>
@@ -37,25 +37,25 @@
 							<input placeholder="00:00" id="logStop" class="timeField" />
 						</td>
 						<td><a href="#" class="commentButton"></a></td>
-						<td><a href="#" class="addTimelogButton">+</a></td>
+						<td class="center"><input type="submit" value="spara" class="positive"/></a></td>
 					</tr>
 					<tr class="even">
 						<td>Use Cases</td>
-						<td>3:32</td>
+						<td class="center">3:32</td>
 						<td><a href="#" class="commentButton"></a></td>
-						<td><input type="checkbox" name="timeLog" value="#" /></td>
+						<td class="center"><input type="checkbox" name="timeLog" value="#" /></td>
 					</tr>
 					<tr>
 						<td>Design</td>
-						<td>15:00</td>
+						<td class="center">15:00</td>
 						<td><a href="#" class="commentButton"></a></td>
-						<td><input type="checkbox" name="timeLog" value="#" /></td>
+						<td class="center"><input type="checkbox" name="timeLog" value="#" /></td>
 					</tr>
 					<tr class="even">
 						<td>Goldplating deluxe</td>
-						<td>6:47</td>
+						<td class="center">6:47</td>
 						<td><a href="#" class="commentButton"></a></td>
-						<td><input type="checkbox" name="timeLog" value="#" /></td>
+						<td class="center"><input type="checkbox" name="timeLog" value="#" /></td>
 					</tr>
 				</table>
 			</form>						
