@@ -2,8 +2,8 @@ var windowSize = {
 	width: 0,
 	height: 0
 },
-loggedIn = false,
-hash;
+	loggedIn = false,
+	hash;
 
 $(document).ready(function() {
 	$('.lightbox').hide();
@@ -50,7 +50,7 @@ $(document).ready(function() {
 	});
 
 	$('#content').on('click', '.projectHeader', function(){
-		var element = $(this);
+		var element = $(this),
 			attrId = element.parent().attr('id'),
 			projectId = attrId.split('project');
 		loadProjectView(element, projectId[1]);
@@ -105,7 +105,7 @@ function doesPasswordMatch(element) {
 function isValidEmailAddress(emailAddress) {
 	var pattern = new RegExp(/^(("[\w-+\s]+")|([\w-+]+(?:\.[\w-+]+)*)|("[\w-+\s]+")([\w-+]+(?:\.[\w-+]+)*))(@((?:[\w-+]+\.)*\w[\w-+]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$)|(@\[?((25[0-5]\.|2[0-4][0-9]\.|1[0-9]{2}\.|[0-9]{1,2}\.))((25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\.){2}(25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\]?$)/i);
 	return pattern.test(emailAddress);
-};
+}
 
 function sendForm(element) {
 	var form = element.parent(),
@@ -125,7 +125,7 @@ function sendForm(element) {
 	});
 	$.post('http://Tidrapportering/'+ formAction, parameters, function(data){
 		// Göra något
-	}, 'json')
+	}, 'json');
 }
 
 function login(element) {
@@ -148,7 +148,7 @@ function login(element) {
 				form.find('.error').remove();
 				form.children().prepend('<p class="error">Fel användarnamn och/eller lösenord</p>');
 			}
-		}, 'json')
+		}, 'json');
 	} else {
 		form.find('.error').remove();
 		form.children().prepend('<p class="error">Fel användarnamn och/eller lösenord</p>');
@@ -177,11 +177,11 @@ function loadLogin() {
 }
 
 function logOut() {
-	if(loggedIn = true){
+	if(loggedIn === true){
 		/*$.post('http://tidrapportering/logout.php', function(data){*/
 			loggedIn = false;
 			/*if(data.status) {*/
-				/*Ändra till pop-up window så användaren inte blir re-directed till index.html, och måste gå tillbaka till den sida där denne blev utloggad ifrån*/
+				/* ändra till popup window så användaren inte blir redirected till index.html, och måste gå tillbaka till den sida där denne blev utloggad ifrån */
 				loadLogin();
 			/*}*/
 		/*}, 'json')*/
@@ -223,7 +223,7 @@ function loadProjects() {
 		'progress': 45,
 		'customer': 'Göteborg & Co',
 		'active': false
-	}
+	};
 	projects[2] = {
 		'projectName': 'Jätteprojektet',
 		'id': 3,
@@ -231,29 +231,8 @@ function loadProjects() {
 		'progress': 5000,
 		'customer': 'Jetebra Ab',
 		'active': true
-	}
-	/*$.get('http://tidrapportering/getProjects', function(data){
-		
-	});*/
-	/*$.each(projects, function() {
-		var html = '<li id="project'+ this.id +'" class="project cf headerList">'+
-			'<div class="projectHeader cf">' +
-				'<hgroup>' +
-					'<h2 class="projectName">'+ this.projectName +'</h2>' +
-					'<h3 class="customerName">'+ this.customer +'</h3>' +
-				'</hgroup>' +
-				'<figure class="progressBar'+ this.id +' cf">' +
-					'<canvas id="progressBar'+ this.id +'"width="300px" height="44px"></canvas>' +
-				'</figure>' +
-				'<span class="progressTotal">'+ this.totalTime +'h</span>' +
-			'</div>' +
-		'</li>';
-		$('#project').append(html);
-		progressBarCanvas(this.id, this.progress, this.totalTime);
-		if(!this.active) {
-			$('#project'+this.id).css('opacity', .4);
-		}
-	});*/
+	};
+
 	$.each(projects, function() {
 		var	projectName = this.projectName,
 			projectId   = this.id,
@@ -263,18 +242,18 @@ function loadProjects() {
 			active      = this.active;
 		$.get('projectList.html', function(data) {
 			var html = $(data);
-			html.attr('id', 'project'+projectId);
-			html.find('figure').addClass('progressBar'+projectId);
-			html.find('canvas').attr('id', 'progressBar'+projectId);
-			html.find('h2').html(projectName);
-			html.find('h3').html(customer);
-			html.find('.progressTotal').html(totalTime);
+			html.attr('id', 'project'+ projectId)
+				.find('figure').addClass('progressBar'+ projectId).end()
+				.find('canvas').attr('id', 'progressBar'+ projectId).end()
+				.find('h2').html(projectName).end()
+				.find('h3').html(customer).end()
+				.find('.progressTotal').html(totalTime);
 			$('#project').append(html);
+			if(!active) {
+				$('#project'+projectId).find('.projectHeader').css('opacity', 0.4);
+			}
 
 			progressBarCanvas(projectId, progress, totalTime);
-			if(!active) {
-				$('#project'+projectId).find('.projectHeader').css('opacity', .4);
-			}
 		});
 	});
 }
@@ -307,18 +286,16 @@ function closePopup() {
 
 function adjustLightbox() {
 	var lightbox = $('.lightbox'),
-		contentDiv = lightbox.children('div'),
-		contentDivWidth = contentDiv.width(),
+		contentDiv       = lightbox.children('div'),
+		contentDivWidth  = contentDiv.width(),
 		contentDivHeight = contentDiv.height(),
-		contentDivLeft = windowSize.width / 2 - contentDivWidth / 2,
-		contentDivTop = windowSize.height / 2 - contentDivHeight / 2,
-		documentHeight = $(document).height();
-
-	/*lightbox.show();*/
+		contentDivLeft   = windowSize.width / 2 - contentDivWidth / 2,
+		contentDivTop    = windowSize.height / 2 - contentDivHeight / 2,
+		documentHeight   = $(document).height();
 
 	if(contentDivHeight > windowSize.height) {
 		contentDivTop = 100;
-	};
+	}
 
 	contentDiv.css({
 		'margin-left' : contentDivLeft+'px',
@@ -329,17 +306,17 @@ function adjustLightbox() {
 }
 
 function progressBarCanvas(id, progress, total) {  
- 	var canvas = document.getElementById('progressBar'+id),
- 		ctx = canvas.getContext('2d'),
- 		totalPercent = canvas.width / total,
- 		progressPercent = progress * totalPercent,  
- 		gradient = ctx.createLinearGradient(0, 0, 0, canvas.height),
- 		textPosition = 300 - progressPercent + 4;  
- 	if(progress > total) {
- 		gradient.addColorStop(1, "rgb(193, 53, 42)");  
+	var canvas = document.getElementById('progressBar'+id),
+		ctx = canvas.getContext('2d'),
+		totalPercent = canvas.width / total,
+		progressPercent = progress * totalPercent,  
+		gradient = ctx.createLinearGradient(0, 0, 0, canvas.height),
+		textPosition = 300 - progressPercent + 4;  
+	if(progress > total) {
+		gradient.addColorStop(1, "rgb(193, 53, 42)");  
 		gradient.addColorStop(0, "rgb(228, 64, 52)");
- 	} else {
- 		gradient.addColorStop(1, "rgb(161, 219, 21)");  
+	} else {
+		gradient.addColorStop(1, "rgb(161, 219, 21)");  
 		gradient.addColorStop(0, "rgb(207, 245, 114)");
 	}
   
