@@ -243,11 +243,11 @@ function loadProjects() {
 		$.get('projectList.html', function(data) {
 			var html = $(data);
 			html.attr('id', 'project'+ projectId)
-				.find('figure').addClass('progressBar'+ projectId).end()
-				.find('canvas').attr('id', 'progressBar'+ projectId).end()
 				.find('h2').html(projectName).end()
 				.find('h3').html(customer).end()
-				.find('.progressTotal').html(totalTime);
+				.find('figure').addClass('progressBar'+ projectId).end()
+				.find('canvas').attr('id', 'progressBar'+ projectId).end()
+				.find('.progressTotal').html(totalTime +'h');
 			$('#project').append(html);
 			if(!active) {
 				$('#project'+projectId).find('.projectHeader').css('opacity', 0.4);
