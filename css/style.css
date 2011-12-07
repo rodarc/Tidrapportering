@@ -66,6 +66,8 @@ ul {
 	background: #4e4d4e;
 	cursor: pointer;
 	padding: 5px;
+	position: relative;
+	z-index: 1;
 }
 
 .projectHeader:hover {
@@ -80,6 +82,7 @@ ul {
 .projectContent {
 	height: 0;
 	overflow: hidden;
+	background: #eeecec;
 }
 
 .projectHeader hgroup {
@@ -208,7 +211,7 @@ h3 {
 	width: 920px;
 	margin: 10px auto;
 	padding: 20px;
-	background-color: #eee;
+	background-color: #f7f7f7;
 	height: auto;
 }
 
