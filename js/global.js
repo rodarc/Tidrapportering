@@ -111,18 +111,28 @@ function sendForm(element) {
 	var form = element.parent(),
 		formAction = form.attr('action'),
 		inputFields = form.find('input');
+		selects = form.find('select');
 	
 	var parameters = {};
 
 	$.each(inputFields, function(){
 		input = $(this);
-		if (input.attr('type') != 'submit') {
+		if (input.attr('type') != 'submit' && input.attr('type') != 'reset') {
 			var inputName = input.attr('name'),
 				inputValue = input.val();
 
 			parameters[inputName] = inputValue;
 			console.log(inputName +' : '+ inputValue);
 		}
+	});
+
+	$.each(selects, function(){
+		select = $(this);
+		var selectName = select.attr('name'),
+			selectValue = select.val();
+
+			parameters[selectName] = selectValue;
+			console.log(selectName +' : '+ selectValue);
 	});
 	console.log('Skickas till ' + formAction);
 	$.post('http://Tidrapportering/'+ formAction, parameters, function(data){
