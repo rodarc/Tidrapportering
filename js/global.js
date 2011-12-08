@@ -18,7 +18,7 @@ $(document).ready(function() {
 	}
 
 	$(window).resize(onResize);
-	$('#login').on('click', function(e){
+	$('#login').off('click').on('click', function(e){
 		e.preventDefault();
 		login($(this));
 	});
@@ -28,14 +28,14 @@ $(document).ready(function() {
 		logOut();
 	});
 
-	$('.formSubmit').on('click', function(e){
+	$('.lightbox').on('click', 'input[type=submit]:not([id=login])', function(e){
 		e.preventDefault();
 		sendForm($(this));
 	});
 
 	$('.lightbox').on('focusout', 'input[name=passwordCheck]', function() {
 		doesPasswordMatch($(this));
-	});
+	});	
 
 	$('.menu').on('click', function(e){
 		e.preventDefault();
@@ -111,18 +111,30 @@ function sendForm(element) {
 	var form = element.parent(),
 		formAction = form.attr('action'),
 		inputFields = form.find('input');
+		selects = form.find('select');
 	
 	var parameters = {};
 
 	$.each(inputFields, function(){
 		input = $(this);
-		if (input.attr('type') != 'submit') {
+		if (input.attr('type') != 'submit' && input.attr('type') != 'reset') {
 			var inputName = input.attr('name'),
 				inputValue = input.val();
 
 			parameters[inputName] = inputValue;
+			console.log(inputName +' : '+ inputValue);
 		}
 	});
+
+	$.each(selects, function(){
+		select = $(this);
+		var selectName = select.attr('name'),
+			selectValue = select.val();
+
+			parameters[selectName] = selectValue;
+			console.log(selectName +' : '+ selectValue);
+	});
+	console.log('Skickas till ' + formAction);
 	$.post('http://Tidrapportering/'+ formAction, parameters, function(data){
 		// Göra något
 	}, 'json');
@@ -135,7 +147,7 @@ function login(element) {
 		password = $('#password').val(),
 		validEmail = isValidEmailAddress(username);
 
-	if(validEmail) {
+	/*if(validEmail) {
 		var parameters = {
 			'username' : username,
 			'password' : password
@@ -152,7 +164,7 @@ function login(element) {
 	} else {
 		form.find('.error').remove();
 		form.children().prepend('<p class="error">Fel användarnamn och/eller lösenord</p>');
-	}
+	}*/
 	loggedIn = true;
 	start('project.html');
 }
