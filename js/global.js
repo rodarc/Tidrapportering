@@ -351,6 +351,7 @@ function loadProjectView(element, projectId) {
 			html.find('select').append(roleOptions);
 			html.find('.projectMemberList').append(projMem);
 			html.find('.timeLogTable').append(timeLogs);
+			html.find('tr').filter(':even').css('background-color', '#eee');
 
 			element.parent().append(html);
 			element.parent().find('.projectContent').animate({height: '400px'}, 300);
