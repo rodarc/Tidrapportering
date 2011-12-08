@@ -259,10 +259,88 @@ function loadProjects() {
 }
 
 function loadProjectView(element, projectId) {
-	var content = element.parent().find('.projectContent');
+	var content = element.parent().find('.projectContent'), 
+		userRoles = {}, 
+		projectMembers = {}, 
+		myTimeLogs = {}
+	;
+
+	userRoles[0] = {
+		'id':'1',
+		'name':'Utvecklare'
+	};
+	userRoles[1] = {
+		'id':'2',
+		'name':'Designer'
+	};
+	userRoles[2] = {
+		'id':'3',
+		'name':'Projektledare'
+	};
+
+	projectMembers[0] = {
+		'id':'1',
+		'name' : 'Bosse Bossesson'
+	};
+	projectMembers[1] = {
+		'id':'2',
+		'name' : 'Nisse Nilsson'
+	};
+	projectMembers[2] = {
+		'id':'3',
+		'name': 'Asa Nilsson'
+	};
+
+	myTimeLogs[0] = {
+		'id':'1',
+		'title':'Use Cases',
+		'comment':'',
+		'duration':'3:32'
+	};
+	myTimeLogs[1] = {
+		'id':'2',
+		'title':'Design',
+		'comment':'',
+		'duration':'15:00'
+	};
+	myTimeLogs[2] = {
+		'id':'3',
+		'title':'Goldplating DeLuxe',
+		'comment':'',
+		'duration':'6:47'
+	};
+
+	var roleOptions = '',
+		projMem = '',
+		timeLogs = ''
+	;
+
+	$.each(userRoles, function() {
+		roleOptions += '<option>' + this.name + '</option>';
+	});
+
+	$.each(projectMembers, function() {
+		projMem += '<li>' + this.name + '</li>';
+	});
+
+	$.each(myTimeLogs, function() {
+		timeLogs += '<tr><td>' + this.title + '</td>' +
+						'<td class="center">' + this.duration + '</td>' +
+						'<td><a href="#" class="commentButton"></a></td>' +
+						'<td class="center"><input type="checkbox" name="timeLog" value="#" id="timeLog' + this.id + '"/></td>' +
+					'</tr>';
+	});
+
 	if(content.length < 1) {
 		$.get('projectView.html', function(data) {
-			element.parent().append(data);
+
+			var html = $(data);
+
+			html.find('select').append(roleOptions);
+			html.find('.projectMemberList').append(projMem);
+			html.find('.timeLogTable').append(timeLogs);
+
+			element.parent().append(html);
 			element.parent().find('.projectContent').animate({height: '400px'}, 300);
 			element.addClass('active');
 		});

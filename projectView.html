@@ -1,25 +1,19 @@
-<div id="itemView" class="projectContent">
+<div class="itemView projectContent">
 	<div id="topRow">
 		<a href="#" class="button">Bjud in</a>
 		<a href="#" class="button positive">Starta tidslogg</a>
-		<select class="rightPositioned">
+		<select name="roles" class="rightPositioned">
 			<option selected="selected">Välj roll</option>
-			<option>Designer</option>
-			<option>Utvecklare</option>
-			<option>Projektledare</option>
 		</select>
 	</div>
-	<div id="projectMembers">
+	<div class="projectMembers">
 		<h3>Deltagare</h3>
 		<div class="infoBox">	
-			<ul>
-				<li>Bosse Bossesson</li>
-				<li>Nisse Nilsson</li>
-				<li>Åsa Nilsson</li>
+			<ul class="projectMemberList">
 			</ul>
 		</div>
 	</div>
-	<div id="myTimeLogs">
+	<div class="myTimeLogs">
 		<dl class="definitionHeader">
 			<dt class="listDataTermLeft">Dina tidsloggar</dt>
 			<dt class="listDataTermRight">Total tid: 25:19</dt>
@@ -41,32 +35,14 @@
 					</thead>
 					<tbody>
 						<tr>
-							<td><input type="text" placeholder="Vad har du gjort?" id="logTitle" /></td>
+							<td><input type="text" placeholder="Vad har du gjort?" name="logTitle"/></td>
 							<td>
-								<input type="text" placeholder="00:00" id="logStart" class="timeField" />
+								<input type="text" placeholder="00:00" class="timeField" name="logStart"/>
 								<span> - </span>
-								<input type="text" placeholder="00:00" id="logStop" class="timeField" />
+								<input type="text" placeholder="00:00" class="timeField" name="logStop"/>
 							</td>
 							<td><a href="#" class="commentButton"></a></td>
 							<td class="center"><input type="submit" value="spara" class="positive smallButton"/></a></td>
-						</tr>
-						<tr class="even">
-							<td>Use Cases</td>
-							<td class="center">3:32</td>
-							<td><a href="#" class="commentButton"></a></td>
-							<td class="center"><input type="checkbox" name="timeLog" value="#" /></td>
-						</tr>
-						<tr>
-							<td>Design</td>
-							<td class="center">15:00</td>
-							<td><a href="#" class="commentButton"></a></td>
-							<td class="center"><input type="checkbox" name="timeLog" value="#" /></td>
-						</tr>
-						<tr class="even">
-							<td>Goldplating deluxe</td>
-							<td class="center">6:47</td>
-							<td><a href="#" class="commentButton"></a></td>
-							<td class="center"><input type="checkbox" name="timeLog" value="#" /></td>
 						</tr>
 					</tbody>
 				</table>
