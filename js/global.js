@@ -121,8 +121,10 @@ function sendForm(element) {
 				inputValue = input.val();
 
 			parameters[inputName] = inputValue;
+			console.log(inputName +' : '+ inputValue);
 		}
 	});
+	console.log('Skickas till ' + formAction);
 	$.post('http://Tidrapportering/'+ formAction, parameters, function(data){
 		// Göra något
 	}, 'json');
