@@ -123,6 +123,7 @@ function sendForm(element) {
 			parameters[inputName] = inputValue;
 		}
 	});
+	console.log(parameters + ' skickas till ' + formAction);
 	$.post('http://Tidrapportering/'+ formAction, parameters, function(data){
 		// Göra något
 	}, 'json');
