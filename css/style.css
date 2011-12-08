@@ -197,11 +197,11 @@ h3 {
 	CONTENT
 \*------------------------------------*/
 
-#projectMembers ul {
+.projectMembers ul {
 	padding: 10px;
 }
 
-#projectMembers li {
+.projectMembers li {
 	list-style-type: none;
 	font-weight: bold;
 	font-size: 1.5rem;
@@ -215,18 +215,18 @@ h3 {
 	height: auto;
 }
 
-#projectMembers {
+.projectMembers {
 	float: left;
 	width: 350px;
 	margin: 0px 20px 20px 0px;
 }
 
-#projectMembers > h3 {
+.projectMembers > h3 {
 	font-size: 2.0rem;
 	margin-bottom: 6px;
 }
 
-#myTimeLogs {
+.myTimeLogs {
 	float: left;
 	width: 530px;
 	margin: 20px 0px 20px 0px;
@@ -292,12 +292,12 @@ select {
 	width: 900px;
 }
 
-#itemView {
+.itemView {
 	padding:10px;
 	width: 900px;
 }
 
-#itemView .button {
+.itemView .button {
 	float: left;
 }
 
@@ -309,7 +309,7 @@ select {
 	width: 17px0px;
 }
 
-#myTimeLogs input{
+.myTimeLogs input{
 	padding: 5px;
 }
 
