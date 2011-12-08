@@ -18,7 +18,7 @@ $(document).ready(function() {
 	}
 
 	$(window).resize(onResize);
-	$('#login').on('click', function(e){
+	$('#login').off('click').on('click', function(e){
 		e.preventDefault();
 		login($(this));
 	});
@@ -135,7 +135,7 @@ function login(element) {
 		password = $('#password').val(),
 		validEmail = isValidEmailAddress(username);
 
-	if(validEmail) {
+	/*if(validEmail) {
 		var parameters = {
 			'username' : username,
 			'password' : password
@@ -152,7 +152,7 @@ function login(element) {
 	} else {
 		form.find('.error').remove();
 		form.children().prepend('<p class="error">Fel användarnamn och/eller lösenord</p>');
-	}
+	}*/
 	loggedIn = true;
 	start('project.html');
 }
@@ -207,6 +207,7 @@ function loadSection(link) {
 }
 
 function loadProjects() {
+	console.log('Laddar projekten');
 	var projects = {};
 	projects[0] = {
 		'projectName': 'Tidrapportering',
