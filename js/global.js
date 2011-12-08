@@ -28,14 +28,14 @@ $(document).ready(function() {
 		logOut();
 	});
 
-	$('.formSubmit').on('click', function(e){
+	$('.lightbox').on('click', 'input[type=submit]:not([id=login])', function(e){
 		e.preventDefault();
 		sendForm($(this));
 	});
 
 	$('.lightbox').on('focusout', 'input[name=passwordCheck]', function() {
 		doesPasswordMatch($(this));
-	});
+	});	
 
 	$('.menu').on('click', function(e){
 		e.preventDefault();
