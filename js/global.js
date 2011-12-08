@@ -214,6 +214,9 @@ function loadSection(link) {
 			if(link == 'project.html') {
 				loadProjects();
 			}
+			if(link == 'customer.html') {
+				loadCustomers();
+			}
 		});
 	}
 }
@@ -284,6 +287,22 @@ function loadProjectView(element, projectId) {
 		});
 		element.removeClass('active');
 	}
+}
+
+function loadCustomers() {
+	var customers = {};
+	customers[0] = { 'name': 'KYH Göteborg' };
+	customers[1] = { 'name': 'Göteborg & Co' };
+	customers[2] = { 'name': 'Jetebra Ab' };
+
+	$.each(customers, function() {
+		var customerName = this.name;
+		$.get('customerList.html', function(data) {
+			var html = $(data);
+			html.find('h2').html(customerName);
+			$('#customers').append(html);
+		});
+	});
 }
 
 function loadPopup(link) {
