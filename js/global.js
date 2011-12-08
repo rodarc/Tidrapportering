@@ -219,7 +219,6 @@ function loadSection(link) {
 }
 
 function loadProjects() {
-	console.log('Laddar projekten');
 	var projects = {};
 	projects[0] = {
 		'projectName': 'Tidrapportering',
