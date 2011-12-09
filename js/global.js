@@ -257,15 +257,10 @@ function loadSection(link, element) {
 			$('.lightbox').fadeOut();
 			$('.active').removeClass('active');
 			$('a[href="'+ link +'"]').addClass('active');
-			if(link == 'project.html') {
-				loadProjects();
-			}
-			if(link == 'customer.html') {
-				loadCustomers();
-			}
-			if(link == 'user.html') {
-				loadUsers();
-			}
+
+			var urlSection = link.split('.')[0],
+				section = 'load'+ urlSection.charAt(0).toUpperCase() + urlSection.slice(1) + 's';
+			window[section]();
 		});
 	}
 }
