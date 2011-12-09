@@ -52,6 +52,11 @@ $(document).ready(function() {
 		loadSection(link);
 	});
 
+	$('#content').on('click', '.deleteTimeLog', function(e){
+		e.preventDefault();
+		deleteTimeLog($(this));
+	})
+
 	$('#content').on('click', '.addButton', function(e){
 		e.preventDefault();
 		var element = $(this),
@@ -148,6 +153,23 @@ function sendForm(element) {
 	$.post('http://Tidrapportering/'+ formAction, parameters, function(data){
 		// Göra något
 	}, 'json');
+}
+
+function deleteTimelog(){
+	var form = element.parent(),
+		formAction = form.attr('action'),
+		checkboxes = form.find('input:checkbox'),
+		checked = $("input:checked").length,
+		timeLogId;
+	if (checked > 0){
+		$.each(':checked', function(){
+			id = attr('id');
+			$.delete_('http://Tidrapportering/timeLog/'+ timeLogId, function(data){
+				// Göra något
+			});	
+		});
+
+	}
 }
 
 function login(element) {
@@ -352,7 +374,7 @@ function loadProjectView(element, projectId) {
 		timeLogs += '<tr><td>' + this.title + '</td>' +
 						'<td class="center">' + this.duration + '</td>' +
 						'<td><a href="#" class="commentButton"></a></td>' +
-						'<td class="center"><input type="checkbox" name="timeLog" value="#" id="timeLog' + this.id + '"/></td>' +
+						'<td class="center"><input type="checkbox" name="timeLog" value="#" id="' + this.id + '"/></td>' +
 					'</tr>';
 	});
 

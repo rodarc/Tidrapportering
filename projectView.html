@@ -14,15 +14,23 @@
 			</ul>
 		</div>
 	</div>
+
 	<div class="myTimeLogs">
 		<dl class="definitionHeader">
 			<dt class="listDataTermLeft">Dina tidsloggar</dt>
 			<dt class="listDataTermRight">Total tid: 25:19</dt>
 		</dl>
 		<div class="infoBox">
-			<a href="#" class="button">Redigera tidslogg</a>
-			<a href="#" class="button">Ta bort tidslogg</a>
-			<a href="#" class="button">Slå ihop tidsloggar</a>		
+			<form class="cf submitLog" action="submitLog.php" method="post">
+				<input type="text" placeholder="Vad har du gjort?" name="logTitle"/>
+				<input type="text" placeholder="Start" class="timeField" name="logStart"/>
+				<input type="text" placeholder="Slut" class="timeField" name="logStop"/>
+				<a href="#" class="commentButton"></a>
+				<input type="submit" value="spara" class="positive smallButton"/></a>
+			</form>
+			<a href="#" class="button editTimeLog">Redigera tidslogg</a>
+			<a href="#" class="button deleteTimeLog">Ta bort tidslogg</a>
+			<a href="#" class="button mergeTimeLog">Slå ihop tidsloggar</a>		
 			
 			<form class="cf" action="timelog.php" method="post">
 				<table class="timeLogTable">
@@ -35,16 +43,6 @@
 						</tr>
 					</thead>
 					<tbody>
-						<tr>
-							<td><input type="text" placeholder="Vad har du gjort?" name="logTitle"/></td>
-							<td>
-								<input type="text" placeholder="00:00" class="timeField" name="logStart"/>
-								<span> - </span>
-								<input type="text" placeholder="00:00" class="timeField" name="logStop"/>
-							</td>
-							<td><a href="#" class="commentButton"></a></td>
-							<td class="center"><input type="submit" value="spara" class="positive smallButton"/></a></td>
-						</tr>
 					</tbody>
 				</table>
 			</form>						
