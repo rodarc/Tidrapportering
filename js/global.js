@@ -4,6 +4,15 @@ var windowSize = {
 },
 	loggedIn = false,
 	hash;
+var userRoles = {},
+	customers = {};
+userRoles[0] = { 'id':'1', 'name':'Utvecklare' };
+userRoles[1] = { 'id':'2', 'name':'Designer' };
+userRoles[2] = { 'id':'3', 'name':'Projektledare' };
+customers[0] = { 'name': 'KYH Göteborg' };
+customers[1] = { 'name': 'Göteborg & Co' };
+customers[2] = { 'name': 'Jetebra Ab' };
+customers[3] = { 'name': 'Dalkurd FF' };
 
 $(document).ready(function() {
 	$('.lightbox').hide();
@@ -45,8 +54,9 @@ $(document).ready(function() {
 
 	$('#content').on('click', '.addButton', function(e){
 		e.preventDefault();
-		var link = $(this).attr('href');
-		loadSection(link);
+		var element = $(this),
+			link = element.attr('href');
+		loadSection(link, element);
 	});
 
 	$('#content').on('click', '.projectHeader', function(){
@@ -200,10 +210,10 @@ function logOut() {
 	}
 }
 
-function loadSection(link) {
+function loadSection(link, element) {
 	var splitLink = link.split('/');
 	if(splitLink[0] == 'popups') {
-		loadPopup(splitLink[1]);
+		loadPopup(splitLink[1], element);
 		adjustLightbox();
 	} else {
 		history.pushState(null, null, '#/'+link);
@@ -262,7 +272,7 @@ function loadProjects() {
 				.find('h3').html(customer).end()
 				.find('figure').addClass('progressBar'+ projectId).end()
 				.find('canvas').attr('id', 'progressBar'+ projectId).end()
-				.find('.progressTotal').html(totalTime +'h');
+				.find('.progressTotal').html(totalTime);
 			$('#project').append(html);
 			if(!active) {
 				$('#project'+projectId).find('.projectHeader').css('opacity', 0.4);
@@ -369,11 +379,6 @@ function loadProjectView(element, projectId) {
 }
 
 function loadCustomers() {
-	var customers = {};
-	customers[0] = { 'name': 'KYH Göteborg' };
-	customers[1] = { 'name': 'Göteborg & Co' };
-	customers[2] = { 'name': 'Jetebra Ab' };
-
 	$.each(customers, function() {
 		var customerName = this.name;
 		$.get('customerList.html', function(data) {
@@ -384,10 +389,30 @@ function loadCustomers() {
 	});
 }
 
-function loadPopup(link) {
-	$('.lightbox').load('popups/'+ link, function() {
+function loadPopup(link, element) {
+	$.get('popups/'+ link, function(data) {
+		var html = $(data),
+			customerOptions = '';
+		if(html.find('select').attr('name') == 'customer') {
+			$.each(customers, function() {
+				customerOptions += '<option value="'+ this.name +'">' + this.name + '</option>';
+			});
+		}
+		if(link == 'createProject.html' || link == 'editProject.html') {
+			html.find('select').append(customerOptions);
+		}
+		if(link == 'editProject.html') {
+			var li = element.parent().parent().parent(),
+				projectName = li.find('.projectName').text(),
+				estimate = li.find('.progressTotal').text(),
+				customer = li.find('.customerName').text();
+			html.find('input[name=projectName]').val(projectName).end()
+				.find('input[name=estimate]').val(estimate);
+			html.find('option[value="'+ customer +'"]').attr('selected', 'selected');
+		}
+		$('.lightbox').html(html).fadeIn();
 		adjustLightbox();
-	}).fadeIn();
+	});
 }
 
 function closePopup() {

@@ -135,6 +135,10 @@ ul {
 	margin-left: 10px;
 }
 
+.progressTotal:after {
+	content: 'h';
+}
+
 /*------------------------------------*\
 	TYPOGRAPHY
 \*------------------------------------*/
@@ -320,7 +324,7 @@ select {
 
 .button {
 	padding: 8px 15px;
-	margin: 5px 5px 5px 0;
+	margin: 5px 10px 5px 0;
 	border: none;
 	border-radius: 8px;
 	text-decoration: none;
@@ -361,7 +365,7 @@ select {
 
 .addButton {
 	float: right;
-	margin-right: 20px;
+	/*margin-right: 20px;*/
 }
 
 .commentButton {
