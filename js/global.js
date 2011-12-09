@@ -6,9 +6,16 @@ var windowSize = {
 	hash;
 var userRoles = {},
 	customers = {};
+	users = {};
+
+users[0] = { 'id':'1', 'firstName': 'Bosse', 'lastName': 'Bossesson', 'userRole': 'Utvecklare'};
+users[1] = { 'id':'2', 'firstName': 'Åsa', 'lastName': 'Nilsson', 'userRole': 'Designer'};
+users[2] = { 'id':'3', 'firstName': 'Nils', 'lastName': 'Nilsson', 'userRole': 'Projektledare'};
+
 userRoles[0] = { 'id':'1', 'name':'Utvecklare' };
 userRoles[1] = { 'id':'2', 'name':'Designer' };
 userRoles[2] = { 'id':'3', 'name':'Projektledare' };
+
 customers[0] = { 'name': 'KYH Göteborg' };
 customers[1] = { 'name': 'Göteborg & Co' };
 customers[2] = { 'name': 'Jetebra Ab' };
@@ -64,11 +71,18 @@ $(document).ready(function() {
 		loadSection(link, element);
 	});
 
-	$('#content').on('click', '.projectHeader', function(){
+	$('#content').on('click', '.listHeader', function(){
 		var element = $(this),
 			attrId = element.parent().attr('id'),
 			projectId = attrId.split('project');
 		loadProjectView(element, projectId[1]);
+	});
+
+	$('#content').on('click', '.userHeader', function(){
+		var element = $(this),
+			attrId = element.parent().attr('id'),
+			userId = attrId.split('user');
+		loadUserView(element, userId[1]);
 	});
 
 	$('.lightbox').on('click', 'input[value="Avbryt"]', function(){
@@ -249,6 +263,9 @@ function loadSection(link, element) {
 			if(link == 'customer.html') {
 				loadCustomers();
 			}
+			if(link == 'user.html') {
+				loadUsers();
+			}
 		});
 	}
 }
@@ -297,7 +314,7 @@ function loadProjects() {
 				.find('.progressTotal').html(totalTime);
 			$('#project').append(html);
 			if(!active) {
-				$('#project'+projectId).find('.projectHeader').css('opacity', 0.4);
+				$('#project'+projectId).find('.listHeader').css('opacity', 0.4);
 			}
 
 			progressBarCanvas(projectId, progress, totalTime);
@@ -400,6 +417,12 @@ function loadProjectView(element, projectId) {
 	}
 }
 
+// function loadUserView(element, userId) {
+// 	$.each(usersRoles, function() {
+// 		'<li>' + this.name + '</li>';
+// 	})
+// }
+
 function loadCustomers() {
 	$.each(customers, function() {
 		var customerName = this.name;
@@ -407,6 +430,20 @@ function loadCustomers() {
 			var html = $(data);
 			html.find('h2').html(customerName);
 			$('#customers').append(html);
+		});
+	});
+}
+
+function loadUsers() {
+	$.each(users, function() {
+		var firstName = this.firstName,
+			lastName = this.lastName,
+			userId = this.userId;
+		$.get('userList.html', function(data) {
+			var html = $(data);
+			html.attr('id', 'userId' + userId)
+				.find('h2').html(firstName + ' ' + lastName);
+			$('#users').append(html);
 		});
 	});
 }
