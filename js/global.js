@@ -46,7 +46,7 @@ $(document).ready(function() {
 	$('#content').on('click', '.deleteTimeLog', function(e){
 		e.preventDefault();
 		deleteTimeLog($(this));
-	})
+	});
 
 	$('#content').on('click', '.addButton', function(e){
 		e.preventDefault();
