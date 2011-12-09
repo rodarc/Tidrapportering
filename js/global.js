@@ -201,6 +201,13 @@ function login(element) {
 	start('project.html');
 }
 
+function search() {
+	sendForm('#search');
+	//ta emot data
+	//ladda searchResult.html med data
+	//lista på samma sätt som projekt?
+}
+
 /*------------------------------------*\
 	SECTIONS
 \*------------------------------------*/
