@@ -313,6 +313,17 @@ select {
 	padding: 5px;
 }
 
+.submitLog {
+	font-size: 1.5rem;
+	margin-bottom: 15px;
+
+}
+
+.submitLog input, .submitLog a {
+	margin-right:10px;
+}
+
+
 
 /*------------------------------------*\
 	BUTTON
