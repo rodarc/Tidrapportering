@@ -52,7 +52,7 @@ ul {
 	padding: 0;
 }
 
-.projectHeader h2, .projectHeader h3, .projectHeader figure, .projectHeader hgroup, .progressTotal {
+.listHeader h2, .listHeader h3, .listHeader figure, .listHeader hgroup, .progressTotal {
 	float: left;
 }
 
@@ -62,7 +62,7 @@ ul {
 	overflow: hidden;
 }
 
-.projectHeader {
+.listHeader {
 	background: #4e4d4e;
 	cursor: pointer;
 	padding: 5px;
@@ -70,11 +70,11 @@ ul {
 	z-index: 1;
 }
 
-.projectHeader:hover {
+.listHeader:hover {
 	background: #383334;
 }
 
-.projectHeader.active {
+.listHeader.active {
 	background: #ff0084;
 	box-shadow: 0 3px 5px rgba(0, 0, 0, 0.3);
 }
@@ -85,13 +85,13 @@ ul {
 	background: #eeecec;
 }
 
-.projectHeader hgroup {
+.listHeader hgroup {
 	width: 500px;
 	padding: 0;
 	margin: 0;
 }
 
-.projectHeader h2 {
+.listHeader h2 {
 	font-size: 24px;
 	font-size: 2.4rem;
 	margin: 0;
@@ -100,7 +100,7 @@ ul {
 	color: #f7f7f7;
 }
 
-.projectHeader h3 {
+.listHeader h3 {
 	font-size: 14px;
 	font-size: 1.4rem;
 	font-weight: normal;
@@ -110,11 +110,11 @@ ul {
 	color: rgba(255, 255, 255, 0.8);
 }
 
-.projectHeader figure {
+.listHeader figure {
 	position: relative;
 }
 
-.projectHeader canvas {
+.listHeader canvas {
 	padding: 0;
 	display: block;
 	background: #eeecec;
