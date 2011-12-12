@@ -8,9 +8,9 @@ var userRoles = {},
 	customers = {};
 	users = {};
 
-users[0] = { 'id':'1', 'firstName': 'Bosse', 'lastName': 'Bossesson', 'userRole': 'Utvecklare'};
-users[1] = { 'id':'2', 'firstName': 'Åsa', 'lastName': 'Nilsson', 'userRole': 'Designer'};
-users[2] = { 'id':'3', 'firstName': 'Nils', 'lastName': 'Nilsson', 'userRole': 'Projektledare'};
+users[1] = { 'id':'1', 'firstName': 'Bosse', 'lastName': 'Bossesson', 'userRole': 'Utvecklare'};
+users[2] = { 'id':'2', 'firstName': 'Åsa', 'lastName': 'Nilsson', 'userRole': 'Designer'};
+users[3] = { 'id':'3', 'firstName': 'Nils', 'lastName': 'Nilsson', 'userRole': 'Projektledare'};
 
 userRoles[0] = { 'id':'1', 'name':'Utvecklare' };
 userRoles[1] = { 'id':'2', 'name':'Designer' };
@@ -83,25 +83,25 @@ $(document).ready(function() {
 		var element = $(this),
 			activePage = $('nav').find('.active').attr('href'),
 			attrId = element.parent().attr('id'),
-			projectId = attrId.split('project'),
-			userId = attrId.split('user'),
-			customerId = attrId.split('customer');
+			projectId = attrId.split('project')[1],
+			userId = attrId.split('userId')[1],
+			customerId = attrId.split('customer')[1];
 		if(activePage == 'project.html') {
-			loadProjectView(element, projectId[1]);
+			loadProjectView(element, projectId);
 		}
 		// if(activePage == 'customer.html') {
-		// 	loadCustomerView(element, customerId[1]);
+		// loadCustomerView(element, customerId[1]);
 		// } 
 		if(activePage == 'user.html') {
-			loadUserView(element, userId[1]);
+			loadUserView(element, userId);
 		}
 	});
 
 	// $('#content').on('click', '.userHeader', function(){
-	// 	var element = $(this),
-	// 		attrId = element.parent().attr('id'),
-	// 		userId = attrId.split('user');
-	// 	loadUserView(element, userId[1]);
+	//	var element = $(this),
+	//		attrId = element.parent().attr('id'),
+	//		userId = attrId.split('user');
+	// loadUserView(element, userId[1]);
 	// });
 
 	$('.lightbox').on('click', 'input[value="Avbryt"]', function(){
@@ -427,7 +427,7 @@ function loadUsers() {
 	$.each(users, function() {
 		var firstName = this.firstName,
 			lastName = this.lastName,
-			userId = this.userId;
+			userId = this.id;
 		$.get('userList.html', function(data) {
 			var html = $(data);
 			html.attr('id', 'userId' + userId)
@@ -438,25 +438,21 @@ function loadUsers() {
 }
 
 function loadUserView(element, userId) {
-var content = element.parent().find('.userContent'),
-	userRole = ''; 
+	var content = element.parent().find('.userContent'),
+		userRole = '<li>' + users[userId].userRole + '</li>';
 
-	console.log(content);
-	console.log(element);	
-
-	$.each(users[userId], function() {
-		userRole = '<li>' + this.userRole + '</li>';
-	});
+	/*$.each(users[userId], function() {
+		userRole += '<li>' + this.userRole + '</li>';
+	});*/
 		
 	if(content.length < 1) {
 		$.get('userView.html', function(data) {
-
 			var html = $(data);
 
 			html.find('.userRoles').append(userRole);
 
 			element.parent().append(html);
-			element.parent().find('.userContent').animate({height: '400px'}, 300);
+			element.parent().find('.userContent').animate({height: 'auto'}, 300);
 			element.addClass('active');
 		});
 	} else {
