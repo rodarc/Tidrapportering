@@ -51,7 +51,15 @@ $(document).ready(function() {
 
 	$('.lightbox').on('focusout', 'input[name=passwordCheck]', function() {
 		doesPasswordMatch($(this));
-	});	
+	});
+
+	$('.lightbox').on('focusout', 'input[type=email]', function() {
+		var element = $(this),
+			email = element.val(),
+			validEmail = isValidEmailAddress(email);
+		if(!validEmail) { element.css('background', 'red'); }
+		if(validEmail) { element.css('background', 'green'); }
+	});
 
 	$('.menu').on('click', function(e){
 		e.preventDefault();
@@ -253,7 +261,7 @@ function loadSection(link, element) {
 		adjustLightbox();
 	} else {
 		history.pushState(null, null, '#/'+link);
-		$('#content').load(link, function(){
+		$('#content').load(link, function() {
 			$('.lightbox').fadeOut();
 			$('.active').removeClass('active');
 			$('a[href="'+ link +'"]').addClass('active');
@@ -291,38 +299,37 @@ function loadProjects() {
 		'customer': 'Jetebra Ab',
 		'active': true
 	};
-
-	$.each(projects, function() {
-		var	projectName = this.projectName,
-			projectId   = this.id,
-			customer    = this.customer,
-			totalTime   = this.totalTime,
-			progress    = this.progress,
-			active      = this.active;
-		$.get('projectList.html', function(data) {
-			var html = $(data);
-			html.attr('id', 'project'+ projectId)
-				.find('h2').html(projectName).end()
-				.find('h3').html(customer).end()
-				.find('figure').addClass('progressBar'+ projectId).end()
-				.find('canvas').attr('id', 'progressBar'+ projectId).end()
-				.find('.progressTotal').html(totalTime);
-			$('#project').append(html);
-			if(!active) {
-				$('#project'+projectId).find('.listHeader').css('opacity', 0.4);
-			}
-
-			progressBarCanvas(projectId, progress, totalTime);
+	$.get('http://192.168.0.53/gbg_php/api/?/jsonp/projects&callback=?', function(data) {
+		$.each(data, function() {
+			var	projectName = this.projectName,
+				projectId   = this.id,
+				customer    = this.customerName,
+				estimate   = this.estimate,
+				progress    = this.progress,
+				active      = this.active;
+			$.get('projectList.html', function(code) {
+				var html = $(code);
+				html.attr('id', 'project'+ projectId)
+					.find('h2').html(projectName).end()
+					.find('h3').html(customer).end()
+					.find('figure').addClass('progressBar'+ projectId).end()
+					.find('canvas').attr('id', 'progressBar'+ projectId).end()
+					.find('.progressTotal').html(estimate);
+				$('#project').append(html);
+				if(!active) {
+					$('#project'+projectId).find('.listHeader').css('opacity', 0.4);
+				}
+				progressBarCanvas(projectId, progress, estimate);
+			});
 		});
-	});
+	}, 'jsonp');
 }
 
 function loadProjectView(element, projectId) {
 	var content = element.parent().find('.projectContent'), 
 		userRoles = {}, 
 		projectMembers = {}, 
-		myTimeLogs = {}
-	;
+		myTimeLogs = {};
 
 	userRoles[0] = {
 		'id':'1',
@@ -474,7 +481,7 @@ function closePopup() {
 }
 
 function adjustLightbox() {
-	var lightbox = $('.lightbox'),
+	var lightbox         = $('.lightbox'),
 		contentDiv       = lightbox.children('div'),
 		contentDivWidth  = contentDiv.width(),
 		contentDivHeight = contentDiv.height(),
