@@ -218,7 +218,43 @@ function login(element) {
 function search() {
 	sendForm('#search');
 	//ta emot data
-	//ladda searchResult.html med data
+	
+	$.each(searchResult, function() {
+		var itemType = this.type;
+
+		switch(itemType) {
+			case 'project':
+				var	projectName = this.projectName,
+					projectId   = this.id,
+					customer    = this.customer,
+					totalTime   = this.totalTime,
+					progress    = this.progress,
+					active      = this.active;
+				$.get('searchResult.html', function(data) {
+					var html = $(data);
+					html.attr('id', 'project'+ projectId)
+						.find('h2').html(projectName).end()
+						.find('h3').html(customer).end()
+						.find('figure').addClass('progressBar'+ projectId).end()
+						.find('canvas').attr('id', 'progressBar'+ projectId).end()
+						.find('.progressTotal').html(totalTime);
+					$('#project').append(html);
+					if(!active) {
+						$('#project'+projectId).find('.listHeader').css('opacity', 0.4);
+					}
+
+					progressBarCanvas(projectId, progress, totalTime);
+				});
+
+			case 'customer':
+				var customerName = this.name;
+				$.get('searchResult.html', function(data) {
+					var html = $(data);
+					html.find('h2').html(customerName);
+					$('#customers').append(html);
+				});
+		}
+	});
 	//lista på samma sätt som projekt?
 }
 
