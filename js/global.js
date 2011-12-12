@@ -8,9 +8,9 @@ var userRoles = {},
 	customers = {};
 	users = {};
 
-users[0] = { 'id':'1', 'firstName': 'Bosse', 'lastName': 'Bossesson', 'userRole': 'Utvecklare'};
-users[1] = { 'id':'2', 'firstName': 'Åsa', 'lastName': 'Nilsson', 'userRole': 'Designer'};
-users[2] = { 'id':'3', 'firstName': 'Nils', 'lastName': 'Nilsson', 'userRole': 'Projektledare'};
+users[1] = { 'id':'1', 'firstName': 'Bosse', 'lastName': 'Bossesson', 'userRole': 'Utvecklare'};
+users[2] = { 'id':'2', 'firstName': 'Åsa', 'lastName': 'Nilsson', 'userRole': 'Designer'};
+users[3] = { 'id':'3', 'firstName': 'Nils', 'lastName': 'Nilsson', 'userRole': 'Projektledare'};
 
 userRoles[0] = { 'id':'1', 'name':'Utvecklare' };
 userRoles[1] = { 'id':'2', 'name':'Designer' };
@@ -51,7 +51,15 @@ $(document).ready(function() {
 
 	$('.lightbox').on('focusout', 'input[name=passwordCheck]', function() {
 		doesPasswordMatch($(this));
-	});	
+	});
+
+	$('.lightbox').on('focusout', 'input[type=email]', function() {
+		var element = $(this),
+			email = element.val(),
+			validEmail = isValidEmailAddress(email);
+		if(!validEmail) { element.css('background', 'red'); }
+		if(validEmail) { element.css('background', 'green'); }
+	});
 
 	$('.menu').on('click', function(e){
 		e.preventDefault();
@@ -73,17 +81,28 @@ $(document).ready(function() {
 
 	$('#content').on('click', '.listHeader', function(){
 		var element = $(this),
+			activePage = $('nav').find('.active').attr('href'),
 			attrId = element.parent().attr('id'),
-			projectId = attrId.split('project');
-		loadProjectView(element, projectId[1]);
+			projectId = attrId.split('project')[1],
+			userId = attrId.split('userId')[1],
+			customerId = attrId.split('customer')[1];
+		if(activePage == 'project.html') {
+			loadProjectView(element, projectId);
+		}
+		// if(activePage == 'customer.html') {
+		// loadCustomerView(element, customerId[1]);
+		// } 
+		if(activePage == 'user.html') {
+			loadUserView(element, userId);
+		}
 	});
 
-	$('#content').on('click', '.userHeader', function(){
-		var element = $(this),
-			attrId = element.parent().attr('id'),
-			userId = attrId.split('user');
-		loadUserView(element, userId[1]);
-	});
+	// $('#content').on('click', '.userHeader', function(){
+	//	var element = $(this),
+	//		attrId = element.parent().attr('id'),
+	//		userId = attrId.split('user');
+	// loadUserView(element, userId[1]);
+	// });
 
 	$('.lightbox').on('click', 'input[value="Avbryt"]', function(){
 		closePopup();
@@ -296,7 +315,7 @@ function loadSection(link, element) {
 		adjustLightbox();
 	} else {
 		history.pushState(null, null, '#/'+link);
-		$('#content').load(link, function(){
+		$('#content').load(link, function() {
 			$('.lightbox').fadeOut();
 			$('.active').removeClass('active');
 			$('a[href="'+ link +'"]').addClass('active');
@@ -334,64 +353,38 @@ function loadProjects() {
 		'customer': 'Jetebra Ab',
 		'active': true
 	};
-
-	$.each(projects, function() {
-		var	projectName = this.projectName,
-			projectId   = this.id,
-			customer    = this.customer,
-			totalTime   = this.totalTime,
-			progress    = this.progress,
-			active      = this.active;
-		$.get('projectList.html', function(data) {
-			var html = $(data);
-			html.attr('id', 'project'+ projectId)
-				.find('h2').html(projectName).end()
-				.find('h3').html(customer).end()
-				.find('figure').addClass('progressBar'+ projectId).end()
-				.find('canvas').attr('id', 'progressBar'+ projectId).end()
-				.find('.progressTotal').html(totalTime);
-			$('#project').append(html);
-			if(!active) {
-				$('#project'+projectId).find('.listHeader').css('opacity', 0.4);
-			}
-
-			progressBarCanvas(projectId, progress, totalTime);
+	$.get('http://192.168.0.53/gbg_php/api/?/jsonp/projects&callback=?', function(data) {
+		$.each(data, function() {
+			var	projectName = this.projectName,
+				projectId   = this.id,
+				customer    = this.customerName,
+				estimate   = this.estimate,
+				progress    = this.progress,
+				active      = this.active;
+			$.get('projectList.html', function(code) {
+				var html = $(code);
+				html.attr('id', 'project'+ projectId)
+					.find('h2').html(projectName).end()
+					.find('h3').html(customer).end()
+					.find('figure').addClass('progressBar'+ projectId).end()
+					.find('canvas').attr('id', 'progressBar'+ projectId).end()
+					.find('.progressTotal').html(estimate);
+				$('#project').append(html);
+				if(!active) {
+					$('#project'+projectId).find('.listHeader').css('opacity', 0.4);
+				}
+				progressBarCanvas(projectId, progress, estimate);
+			});
 		});
-	});
+	}, 'jsonp');
 }
 
 function loadProjectView(element, projectId) {
 	var content = element.parent().find('.projectContent'), 
-		userRoles = {}, 
 		projectMembers = {}, 
 		myTimeLogs = {}
 	;
-
-	userRoles[0] = {
-		'id':'1',
-		'name':'Utvecklare'
-	};
-	userRoles[1] = {
-		'id':'2',
-		'name':'Designer'
-	};
-	userRoles[2] = {
-		'id':'3',
-		'name':'Projektledare'
-	};
-
-	projectMembers[0] = {
-		'id':'1',
-		'name' : 'Bosse Bossesson'
-	};
-	projectMembers[1] = {
-		'id':'2',
-		'name' : 'Nisse Nilsson'
-	};
-	projectMembers[2] = {
-		'id':'3',
-		'name': 'Asa Nilsson'
-	};
+		console.log(content);
 
 	myTimeLogs[0] = {
 		'id':'1',
@@ -413,7 +406,7 @@ function loadProjectView(element, projectId) {
 	};
 
 	var roleOptions = '',
-		projMem = '',
+		user = '',
 		timeLogs = ''
 	;
 
@@ -421,8 +414,8 @@ function loadProjectView(element, projectId) {
 		roleOptions += '<option>' + this.name + '</option>';
 	});
 
-	$.each(projectMembers, function() {
-		projMem += '<li>' + this.name + '</li>';
+	$.each(users, function() {
+		user += '<li>' + this.firstName + ' ' + this.lastName + '</li>';
 	});
 
 	$.each(myTimeLogs, function() {
@@ -439,7 +432,7 @@ function loadProjectView(element, projectId) {
 			var html = $(data);
 
 			html.find('select').append(roleOptions);
-			html.find('.projectMemberList').append(projMem);
+			html.find('.projectMemberList').append(user);
 			html.find('.timeLogTable').append(timeLogs);
 			html.find('tr').filter(':even').css('background-color', '#eee');
 
@@ -454,12 +447,6 @@ function loadProjectView(element, projectId) {
 		element.removeClass('active');
 	}
 }
-
-// function loadUserView(element, userId) {
-// 	$.each(usersRoles, function() {
-// 		'<li>' + this.name + '</li>';
-// 	})
-// }
 
 function loadCustomers() {
 	$.each(customers, function() {
@@ -476,7 +463,7 @@ function loadUsers() {
 	$.each(users, function() {
 		var firstName = this.firstName,
 			lastName = this.lastName,
-			userId = this.userId;
+			userId = this.id;
 		$.get('userList.html', function(data) {
 			var html = $(data);
 			html.attr('id', 'userId' + userId)
@@ -484,6 +471,32 @@ function loadUsers() {
 			$('#users').append(html);
 		});
 	});
+}
+
+function loadUserView(element, userId) {
+	var content = element.parent().find('.userContent'),
+		userRole = '<li>' + users[userId].userRole + '</li>';
+
+	/*$.each(users[userId], function() {
+		userRole += '<li>' + this.userRole + '</li>';
+	});*/
+		
+	if(content.length < 1) {
+		$.get('userView.html', function(data) {
+			var html = $(data);
+
+			html.find('.userRoles').append(userRole);
+
+			element.parent().append(html);
+			element.parent().find('.userContent').animate({height: 'auto'}, 300);
+			element.addClass('active');
+		});
+	} else {
+		content.animate({height: '1px'}, 300, function(){
+			content.remove();
+		});
+		element.removeClass('active');
+	}
 }
 
 function loadPopup(link, element) {
@@ -517,7 +530,7 @@ function closePopup() {
 }
 
 function adjustLightbox() {
-	var lightbox = $('.lightbox'),
+	var lightbox         = $('.lightbox'),
 		contentDiv       = lightbox.children('div'),
 		contentDivWidth  = contentDiv.width(),
 		contentDivHeight = contentDiv.height(),
