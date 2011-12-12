@@ -73,17 +73,28 @@ $(document).ready(function() {
 
 	$('#content').on('click', '.listHeader', function(){
 		var element = $(this),
+			activePage = $('nav').find('.active').attr('href'),
 			attrId = element.parent().attr('id'),
-			projectId = attrId.split('project');
-		loadProjectView(element, projectId[1]);
+			projectId = attrId.split('project'),
+			userId = attrId.split('user'),
+			customerId = attrId.split('customer');
+		if(activePage == 'project.html') {
+			loadProjectView(element, projectId[1]);
+		}
+		// if(activePage == 'customer.html') {
+		// 	loadCustomerView(element, customerId[1]);
+		// } 
+		if(activePage == 'user.html') {
+			loadUserView(element, userId[1]);
+		}
 	});
 
-	$('#content').on('click', '.userHeader', function(){
-		var element = $(this),
-			attrId = element.parent().attr('id'),
-			userId = attrId.split('user');
-		loadUserView(element, userId[1]);
-	});
+	// $('#content').on('click', '.userHeader', function(){
+	// 	var element = $(this),
+	// 		attrId = element.parent().attr('id'),
+	// 		userId = attrId.split('user');
+	// 	loadUserView(element, userId[1]);
+	// });
 
 	$('.lightbox').on('click', 'input[value="Avbryt"]', function(){
 		closePopup();
@@ -326,36 +337,10 @@ function loadProjects() {
 
 function loadProjectView(element, projectId) {
 	var content = element.parent().find('.projectContent'), 
-		userRoles = {}, 
 		projectMembers = {}, 
 		myTimeLogs = {}
 	;
-
-	userRoles[0] = {
-		'id':'1',
-		'name':'Utvecklare'
-	};
-	userRoles[1] = {
-		'id':'2',
-		'name':'Designer'
-	};
-	userRoles[2] = {
-		'id':'3',
-		'name':'Projektledare'
-	};
-
-	projectMembers[0] = {
-		'id':'1',
-		'name' : 'Bosse Bossesson'
-	};
-	projectMembers[1] = {
-		'id':'2',
-		'name' : 'Nisse Nilsson'
-	};
-	projectMembers[2] = {
-		'id':'3',
-		'name': 'Asa Nilsson'
-	};
+		console.log(content);
 
 	myTimeLogs[0] = {
 		'id':'1',
@@ -377,7 +362,7 @@ function loadProjectView(element, projectId) {
 	};
 
 	var roleOptions = '',
-		projMem = '',
+		user = '',
 		timeLogs = ''
 	;
 
@@ -385,8 +370,8 @@ function loadProjectView(element, projectId) {
 		roleOptions += '<option>' + this.name + '</option>';
 	});
 
-	$.each(projectMembers, function() {
-		projMem += '<li>' + this.name + '</li>';
+	$.each(users, function() {
+		user += '<li>' + this.firstName + ' ' + this.lastName + '</li>';
 	});
 
 	$.each(myTimeLogs, function() {
@@ -403,7 +388,7 @@ function loadProjectView(element, projectId) {
 			var html = $(data);
 
 			html.find('select').append(roleOptions);
-			html.find('.projectMemberList').append(projMem);
+			html.find('.projectMemberList').append(user);
 			html.find('.timeLogTable').append(timeLogs);
 			html.find('tr').filter(':even').css('background-color', '#eee');
 
@@ -418,12 +403,6 @@ function loadProjectView(element, projectId) {
 		element.removeClass('active');
 	}
 }
-
-// function loadUserView(element, userId) {
-// 	$.each(usersRoles, function() {
-// 		'<li>' + this.name + '</li>';
-// 	})
-// }
 
 function loadCustomers() {
 	$.each(customers, function() {
@@ -448,6 +427,36 @@ function loadUsers() {
 			$('#users').append(html);
 		});
 	});
+}
+
+function loadUserView(element, userId) {
+var content = element.parent().find('.userContent'),
+	userRole = ''; 
+
+	console.log(content);
+	console.log(element);	
+
+	$.each(users[userId], function() {
+		userRole = '<li>' + this.userRole + '</li>';
+	});
+		
+	if(content.length < 1) {
+		$.get('userView.html', function(data) {
+
+			var html = $(data);
+
+			html.find('.userRoles').append(userRole);
+
+			element.parent().append(html);
+			element.parent().find('.userContent').animate({height: '400px'}, 300);
+			element.addClass('active');
+		});
+	} else {
+		content.animate({height: '1px'}, 300, function(){
+			content.remove();
+		});
+		element.removeClass('active');
+	}
 }
 
 function loadPopup(link, element) {
