@@ -317,8 +317,8 @@ function loadProjects() {
 		'customer': 'Jetebra Ab',
 		'active': true
 	};
-	$.get('http://192.168.0.53/gbg_php/api/?/jsonp/projects&callback=?', function(data) {
-		$.each(data, function() {
+	// $.get('http://192.168.0.53/gbg_php/api/?/jsonp/projects&callback=?', function(data) {
+		$.each(projects, function(data) {
 			var	projectName = this.projectName,
 				projectId   = this.id,
 				customer    = this.customerName,
@@ -340,7 +340,7 @@ function loadProjects() {
 				progressBarCanvas(projectId, progress, estimate);
 			});
 		});
-	}, 'jsonp');
+	// }, 'jsonp');
 }
 
 function loadProjectView(element, projectId) {
