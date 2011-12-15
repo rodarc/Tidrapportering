@@ -8,7 +8,6 @@ var userRoles = {},
 	customers = {};
 	users = {};
 
-users[1] = { 'id':'1', 'firstName': 'Bosse', 'lastName': 'Bossesson', 'userRole': 'Utvecklare', 'username': 'thebose@systämät.se'};
 users[2] = { 'id':'2', 'firstName': 'Åsa', 'lastName': 'Nilsson', 'userRole': 'Designer', 'username': 'killeråsa@hotmale.com'};
 users[3] = { 'id':'3', 'firstName': 'Nils', 'lastName': 'Nilsson', 'userRole': 'Projektledare', 'username': 'herrnilsson@gunitmail.se'};
 
