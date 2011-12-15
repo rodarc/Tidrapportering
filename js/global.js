@@ -317,6 +317,7 @@ function loadProjects() {
 		'customer': 'Jetebra Ab',
 		'active': true
 	};
+
 	$.each(projects, function() {
 		var	projectName = this.projectName,
 			projectId   = this.id,
