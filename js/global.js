@@ -107,6 +107,13 @@ $(document).ready(function() {
 	$('.lightbox').on('click', 'input[value="Avbryt"]', function(){
 		closePopup();
 	});
+
+	$('.search').submit(function(e) {
+		// loadSearchResult();
+		e.preventDefault();
+		var link = 'searchResult.html';
+		loadSection(link);
+	});
 });
 
 function onResize(){
@@ -232,13 +239,6 @@ function login(element) {
 	}*/
 	loggedIn = true;
 	start('project.html');
-}
-
-function search() {
-	sendForm('#search');
-	//ta emot data
-	//ladda searchResult.html med data
-	//lista på samma sätt som projekt?
 }
 
 /*------------------------------------*\
@@ -559,4 +559,84 @@ function progressBarCanvas(id, progress, total) {
 	} else {
 		canvasText.css('right', textPosition);
 	}
+}
+
+function loadSearchResults() {
+
+	var searchResult = {};
+
+	searchResult[0] = {
+		'type': 'project',
+		'projectName': 'Tidrapportering',
+		'id': 1,
+		'totalTime': 200,
+		'progress': 73,
+		'customer': 'KYH Göteborg',
+		'active': true
+	};
+	searchResult[1] = {
+		'type': 'project',
+		'projectName': 'Hemsida',
+		'id': 2,
+		'totalTime': 50,
+		'progress': 45,
+		'customer': 'Göteborg & Co',
+		'active': false
+	};
+	searchResult[2] = {
+		'type': 'project',
+		'projectName': 'Jätteprojektet',
+		'id': 3,
+		'totalTime': 2545,
+		'progress': 5000,
+		'customer': 'Jetebra Ab',
+		'active': true
+	};
+
+	searchResult[3] = { 'type': 'customer', 'name': 'KYH Göteborg' };
+	searchResult[4] = { 'type': 'customer', 'name': 'Göteborg & Co' };
+	searchResult[5] = { 'type': 'customer', 'name': 'Jetebra Ab' };
+	searchResult[6] = { 'type': 'customer', 'name': 'Dalkurd FF' };
+	
+	$.each(searchResult, function() {
+		var itemType = this.type;
+		console.log(itemType);
+
+		switch(itemType) {
+			case 'project':
+					console.log(this);
+
+				var	projectName = this.projectName,
+					projectId   = this.id,
+					customer    = this.customer,
+					totalTime   = this.totalTime,
+					progress    = this.progress,
+					active      = this.active;
+				$.get('projectList.html', function(data) {
+					var html = $(data);
+					html.attr('id', 'project'+ projectId)
+						.find('h2').html(projectName).end()
+						.find('h3').html(customer).end()
+						.find('figure').addClass('progressBar'+ projectId).end()
+						.find('canvas').attr('id', 'progressBar'+ projectId).end()
+						.find('.progressTotal').html(totalTime);
+					$('#searchResult').append(html);
+					if(!active) {
+						$('#project'+projectId).find('.listHeader').css('opacity', 0.4);
+					}
+					progressBarCanvas(projectId, progress, totalTime);
+
+				});
+				break;
+
+			case 'customer':
+				var customerName = this.name;
+				$.get('customerList.html', function(data) {
+					var html = $(data);
+					html.find('h2').html(customerName);
+					$('#searchResult').append(html);
+				});
+				break;
+		}
+	});
 }
