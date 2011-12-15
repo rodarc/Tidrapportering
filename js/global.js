@@ -466,7 +466,7 @@ function loadPopup(link, element) {
 		var html = $(data),
 			customerOptions = '',
 			rolesOptions = '',
-			li = element.parent().parent().parent();
+			li;
 		if(html.find('select').attr('name') == 'customer') {
 			$.each(customers, function() {
 				customerOptions += '<option value="'+ this.name +'">' + this.name + '</option>';
@@ -481,6 +481,7 @@ function loadPopup(link, element) {
 			html.find('select').append(customerOptions);
 		}
 		if(link == 'editUser.html') {
+			li = element.parent().parent().parent();
 			var	id = li.attr('id').split('userId')[1],
 				firstName = users[id].firstName,
 				lastName = users[id].lastName,
@@ -493,6 +494,7 @@ function loadPopup(link, element) {
 			html.find('option[value="'+ users[id].userRole +'"]').attr('selected', 'selected');
 		}
 		if(link == 'editProject.html') {
+			li = element.parent().parent().parent();
 			var	projectName = li.find('.projectName').text(),
 				estimate = li.find('.progressTotal').text(),
 				customer = li.find('.customerName').text();
