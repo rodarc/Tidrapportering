@@ -8,9 +8,9 @@ var userRoles = {},
 	customers = {};
 	users = {};
 
-users[1] = { 'id':'1', 'firstName': 'Bosse', 'lastName': 'Bossesson', 'userRole': 'Utvecklare'};
-users[2] = { 'id':'2', 'firstName': 'Åsa', 'lastName': 'Nilsson', 'userRole': 'Designer'};
-users[3] = { 'id':'3', 'firstName': 'Nils', 'lastName': 'Nilsson', 'userRole': 'Projektledare'};
+users[1] = { 'id':'1', 'firstName': 'Bosse', 'lastName': 'Bossesson', 'userRole': 'Utvecklare', 'username': 'thebose@systämät.se'};
+users[2] = { 'id':'2', 'firstName': 'Åsa', 'lastName': 'Nilsson', 'userRole': 'Designer', 'username': 'killeråsa@hotmale.com'};
+users[3] = { 'id':'3', 'firstName': 'Nils', 'lastName': 'Nilsson', 'userRole': 'Projektledare', 'username': 'herrnilsson@gunitmail.se'};
 
 userRoles[0] = { 'id':'1', 'name':'Utvecklare' };
 userRoles[1] = { 'id':'2', 'name':'Designer' };
@@ -296,7 +296,7 @@ function loadProjects() {
 	projects[0] = {
 		'projectName': 'Tidrapportering',
 		'id': 1,
-		'totalTime': 200,
+		'estimate': 200,
 		'progress': 73,
 		'customer': 'KYH Göteborg',
 		'active': true
@@ -304,7 +304,7 @@ function loadProjects() {
 	projects[1] = {
 		'projectName': 'Hemsida',
 		'id': 2,
-		'totalTime': 50,
+		'estimate': 50,
 		'progress': 45,
 		'customer': 'Göteborg & Co',
 		'active': false
@@ -312,35 +312,34 @@ function loadProjects() {
 	projects[2] = {
 		'projectName': 'Jätteprojektet',
 		'id': 3,
-		'totalTime': 2545,
+		'estimate': 2545,
 		'progress': 5000,
 		'customer': 'Jetebra Ab',
 		'active': true
 	};
-	// $.get('http://192.168.0.53/gbg_php/api/?/jsonp/projects&callback=?', function(data) {
-		$.each(projects, function(data) {
-			var	projectName = this.projectName,
-				projectId   = this.id,
-				customer    = this.customerName,
-				estimate   = this.estimate,
-				progress    = this.progress,
-				active      = this.active;
-			$.get('projectList.html', function(code) {
-				var html = $(code);
-				html.attr('id', 'project'+ projectId)
-					.find('h2').html(projectName).end()
-					.find('h3').html(customer).end()
-					.find('figure').addClass('progressBar'+ projectId).end()
-					.find('canvas').attr('id', 'progressBar'+ projectId).end()
-					.find('.progressTotal').html(estimate);
-				$('#project').append(html);
-				if(!active) {
-					$('#project'+projectId).find('.listHeader').css('opacity', 0.4);
-				}
-				progressBarCanvas(projectId, progress, estimate);
-			});
+
+	$.each(projects, function() {
+		var	projectName = this.projectName,
+			projectId   = this.id,
+			customer    = this.customer,
+			estimate    = this.estimate,
+			progress    = this.progress,
+			active      = this.active;
+		$.get('projectList.html', function(code) {
+			var html = $(code);
+			html.attr('id', 'project'+ projectId)
+				.find('h2').html(projectName).end()
+				.find('h3').html(customer).end()
+				.find('figure').addClass('progressBar'+ projectId).end()
+				.find('canvas').attr('id', 'progressBar'+ projectId).end()
+				.find('.progressTotal').html(estimate);
+			$('#project').append(html);
+			if(!active) {
+				$('#project'+projectId).find('.listHeader').css('opacity', 0.4);
+			}
+			progressBarCanvas(projectId, progress, estimate);
 		});
-	// }, 'jsonp');
+	});
 }
 
 function loadProjectView(element, projectId) {
@@ -466,18 +465,36 @@ function loadUserView(element, userId) {
 function loadPopup(link, element) {
 	$.get('popups/'+ link, function(data) {
 		var html = $(data),
-			customerOptions = '';
+			customerOptions = '',
+			rolesOptions = '',
+			li = element.parent().parent().parent();
 		if(html.find('select').attr('name') == 'customer') {
 			$.each(customers, function() {
 				customerOptions += '<option value="'+ this.name +'">' + this.name + '</option>';
 			});
 		}
+		if(html.find('select').attr('name') == 'roles') {
+			$.each(userRoles, function() {
+				rolesOptions += '<option value="'+ this.name +'">' + this.name + '</option>';
+			});
+		}
 		if(link == 'createProject.html' || link == 'editProject.html') {
 			html.find('select').append(customerOptions);
 		}
+		if(link == 'editUser.html') {
+			var	id = li.attr('id').split('userId')[1],
+				firstName = users[id].firstName,
+				lastName = users[id].lastName,
+				username = users[id].username;
+			
+			html.find('#username').val(username);
+			html.find('#firstName').val(firstName);
+			html.find('#lastName').val(lastName);
+			html.find('select').append(rolesOptions);
+			html.find('option[value="'+ users[id].userRole +'"]').attr('selected', 'selected');
+		}
 		if(link == 'editProject.html') {
-			var li = element.parent().parent().parent(),
-				projectName = li.find('.projectName').text(),
+			var	projectName = li.find('.projectName').text(),
 				estimate = li.find('.progressTotal').text(),
 				customer = li.find('.customerName').text();
 			html.find('input[name=projectName]').val(projectName).end()
